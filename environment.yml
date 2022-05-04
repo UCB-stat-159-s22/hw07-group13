@@ -1,1 +1,10 @@
-#test
+name: aqproject
+dependencies:
+  - ipykernel
+  - python
+  - requests
+  - pandas
+  - seaborn
+  - pip
+  - pip:
+    - py-openaq

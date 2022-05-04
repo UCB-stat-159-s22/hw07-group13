@@ -5,6 +5,8 @@ dependencies:
   - requests
   - pandas
   - seaborn
+  - geopandas
+  - Shapely
   - pip
   - pip:
     - py-openaq

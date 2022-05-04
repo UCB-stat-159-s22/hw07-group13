@@ -1,0 +1,5 @@
+- Use Twitter API to conduct NLP/sentiment analysis on recent news of Elon Musk purchasing Twitter; compare to other major events (business related, Twitter related, etc.)
+- Use https://registry.opendata.aws/opencitymodel/ to see how building footprint/height is changing in Berkeley over however many years. Compare to San Francisco, Oakland, NYC, etc.
+- Use https://worldbank.github.io/OpenNightLights/welcome.html to compare light pollution from major events (e.g., different Olympic cities, Olympics vs FIFA etc.)
+- Use https://registry.opendata.aws/openaq/#usageexamples to explore wildfire impact on air quality in the Bay Area. See what the "max radius of impact" was on other parts of the country/world
+- Use https://registry.opendata.aws/nyc-tlc-trip-records-pds/#usageexamples to explore impacts of taxi driver strike in 2017 in NYC. If data is available, see if there was an increase in other modes used (e.g., subway to/from airport)

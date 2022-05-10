@@ -215,7 +215,7 @@ def pointmap_single(data, basemap, loc_name='Bay Area', param='pm25', date1='202
         plt.savefig(save_loc+loc_name.replace(" ", "_") + '_'+ param + "_"+ str(date1).replace(" ", "_")+'.png')
     return fig
 
-def aqviz(dataframe, coords, date='2020-09-06 17:00:00', param='pm25', save=True, save_loc='figures/'):
+def aqviz(dataframe, coords, region='Bay Area',date='2020-09-06 17:00:00', param='pm25', save=True, save_loc='figures/'):
     
     '''
     Based on: https://stackoverflow.com/questions/26872337/how-can-i-get-my-contour-plot-superimposed-on-a-basemap
@@ -305,6 +305,6 @@ def aqviz(dataframe, coords, date='2020-09-06 17:00:00', param='pm25', save=True
     # # add colour bar, title, and scale
     cbar = plt.colorbar(orientation='vertical', fraction=.057, pad=0.05)
     cbar.set_label(param)
-    plt.title("Bay Area AQ -- " + param + " " + str(date))
+    plt.title(region+" AQ -- " + param + " " + str(date))
     if save:
-        plt.savefig(save_loc+'Bay_Area_AQ_'+ param + "_"+ str(date).replace(" ", "_")+'.png')
+        plt.savefig(save_loc+region.replace(" ", "_")+'_AQ_'+ param + "_"+ str(date).replace(" ", "_")+'.png')

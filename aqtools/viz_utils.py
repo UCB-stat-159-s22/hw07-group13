@@ -20,14 +20,12 @@ from matplotlib.colors import Normalize
 def location_filter(orig_table, minlat = 36., minlon = -123.5, maxlat=39., maxlon = -121, starttime='2020-09-07', endtime='2020-09-13'):
     
     '''
-    inputs
-    ----
-    orig_table: the result of an api.location() call; e.g. the US locs
+    inputs:
+        orig_table: the result of an api.location() call; e.g. the US locs
     
     
     output:
-    ----
-    filtered_table: a DataFrame containing the original locations that pass the lat-lon and date filters
+        filtered_table: a DataFrame containing the original locations that pass the lat-lon and date filters
     
     
     '''
@@ -45,14 +43,12 @@ def location_filter(orig_table, minlat = 36., minlon = -123.5, maxlat=39., maxlo
 def param_data_per_loc_for_period(loc_table, start_date= '2020-09-07', end_date='2020-09-13', param='pm25', limit=1000, interpolate=True):
     
     '''
-    input
-    _______
-    loc_table: result from filtered table
+    input:
+        loc_table: result from filtered table
     
-    output
-    ______
-    df: a DataFrame of each location's data for the parameter specified for the date range specified.
-        Results will be forwards and backwards interpolated in interpolate=True
+    output:
+        df: a DataFrame of each location's data for the parameter specified for the date range specified.
+            Results will be forwards and backwards interpolated in interpolate=True
    
     '''
     
@@ -93,10 +89,13 @@ def param_data_per_loc_for_period(loc_table, start_date= '2020-09-07', end_date=
 
 def cities_coords(loc_table, df):
     ''' 
-    loc_table is a dataframe that is the output of location_filter
-    df is a dataframe that is the output of param_data_per_loc_for_period
+    inputs:
+        loc_table is a dataframe that is the output of location_filter
+        df is a dataframe that is the output of param_data_per_loc_for_period
     
-    returns a GeoDataFrame of cities coordinates, and a 
+    outputs:
+        cities_coords: a GeoDataFrame of cities coordinates
+        coord_list: a list of all of the coordinates, to be used in the aqviz() plotter function 
     
     '''
     name_list = []
@@ -114,8 +113,9 @@ def cities_coords(loc_table, df):
 
 def merge_and_save_gdf(cities_coords, data, save=True, filename='data/bayareadarkdays.geojson'):
     '''
-    cities_coords is the first result of the cities_coords() function
-    data is the result of param_data_per_loc_for_period()
+    inputs:
+        cities_coords: is the first result of the cities_coords() function
+        data: is the result of param_data_per_loc_for_period()
     
     returns:
         temp, a full Dataframe containing all data in a merged format that can be read by the plotting functions.
@@ -134,10 +134,19 @@ def merge_and_save_gdf(cities_coords, data, save=True, filename='data/bayareadar
         temp_text.to_file(filename, driver='GeoJSON')  
     return temp
 
-def pointmap_compare(loc_name, param, data, date1, date2, basemap, center_lat, center_lon, color_min, color_max, xmin, xmax, ymin, ymax, min_scale, max_scale, save, save_loc='figures/'):
+def pointmap_compare(data, basemap, loc_name='Bay Area', param='pm25', date1='2020-09-06 17:00:00', date2='2020-09-06 19:00:00', center_lat=37.8711428, center_lon=-122.3714777,
+                 color_min=0, color_max=342, xmin=-50000,xmax=60000, ymin=-60000, ymax=50000, min_scale=50, max_scale=50, save=True, save_loc='figures/'):
     
     '''
     Creates two geoplot point plots comparing param value on date1 and date2   
+    
+    input: 
+        data: the result of the merge_and_save_gdf() file
+        basemap: variable pointing to a basemap to go under the pointmap
+        
+     output:
+         fig: the two geoplots
+         
     
     
     
@@ -170,7 +179,24 @@ def pointmap_compare(loc_name, param, data, date1, date2, basemap, center_lat, c
     return fig
 
     
-def pointmap_single(loc_name, param, data, date1, basemap, center_lat, center_lon, color_min, color_max, xmin, xmax, ymin, ymax, min_scale, max_scale, save, save_loc='figures/'):
+def pointmap_single(data, basemap, loc_name='Bay Area', param='pm25', date1='2020-09-06 17:00:00', center_lat=37.8711428, center_lon=-122.3714777,
+                 color_min=0, color_max=342, xmin=-50000,xmax=60000, ymin=-60000, ymax=50000, min_scale=50, max_scale=50, save=True,save_loc='figures/'):
+    
+    '''
+    Creates a single geoplot point plot of one param value on date1  
+    
+    input: 
+        data: the result of the merge_and_save_gdf() file
+        basemap: variable pointing to a basemap to go under the pointmap
+        
+     output:
+         fig: the two geoplots
+         
+    
+    
+    
+    '''
+    
     norm = mpl.colors.Normalize(vmin=color_min, vmax=color_max)
     cmap = mpl.cm.ScalarMappable(norm=norm, cmap='inferno_r').cmap
 
@@ -189,8 +215,24 @@ def pointmap_single(loc_name, param, data, date1, basemap, center_lat, center_lo
         plt.savefig(save_loc+loc_name.replace(" ", "_") + '_'+ param + "_"+ str(date1).replace(" ", "_")+'.png')
     return fig
 
-def aqviz(dataframe, coords, date, param, save, save_loc='figures/'):
-    # https://stackoverflow.com/questions/26872337/how-can-i-get-my-contour-plot-superimposed-on-a-basemap
+def aqviz(dataframe, coords, date='2020-09-06 17:00:00', param='pm25', save=True, save_loc='figures/'):
+    
+    '''
+    Based on: https://stackoverflow.com/questions/26872337/how-can-i-get-my-contour-plot-superimposed-on-a-basemap
+    
+    Creates a heatmap based on param values for a specific date
+    
+    inputs:
+        dataframe: the result from the merge_and_save_gdf() function
+        coords: coordinates of the locations, second result from cities_coords() function
+
+    outputs:
+        a figure of the heatmap
+    
+    
+    '''
+    
+    
     # set up plot
     plt.clf()
     fig = plt.figure(figsize=(10, 10))

@@ -9,6 +9,7 @@ dependencies:
   - Shapely
   - geoplot
   - imageio
+  - pytest
   - pip
   - pip:
     - py-openaq

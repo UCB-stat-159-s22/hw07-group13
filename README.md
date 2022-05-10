@@ -1,5 +1,9 @@
 This is a repo for the STAT 159/259 final project for group 13.
 
+![Alt Text](figures/mygif.gif)
+
+
+
 We need:
 
 

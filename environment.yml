@@ -2,12 +2,12 @@ name: aqproject
 dependencies:
   - ipykernel
   - python
-  - requests
+  - numpy
   - pandas
   - seaborn
-  - geopandas
-  - Shapely
-  - geoplot
   - pip
+  - scipy
+  - matplotlib
+  - tensorflow=2.7
   - pip:
     - py-openaq

@@ -2,7 +2,6 @@ This is a repo for the STAT 159/259 final project for group 13.
 
 We need:
 
-- data
 
 - importable utility functions with tests and docstrings (min 2)
 

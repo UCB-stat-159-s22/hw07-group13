@@ -32,13 +32,17 @@ def param_data_per_loc_for_period(loc_table, start_date= '2020-09-07', end_date=
                                  date_from= start_date, date_to=end_date, df=True, limit=limit)
             table = table.reset_index()
             date_vals = dict(list(zip(table['date.local'], table['value'])))
-            if dark_days_data.has_key(location):
-                location = location +'_'+ str(np.random.randint(0,1000000))
+            if location in dark_days_data:
+                location = str(location) +'_'+ str(np.random.randint(0,1000000))
             dark_days_data[location] = list()
             dark_days_data[location].append(coords)
             dark_days_data[location].append(date_vals)
-        except:
+
+        except KeyError:
             continue
+        except:
+            raise
+
     df = pd.DataFrame.from_dict(dark_days_data[list(dark_days_data.keys())[0]][1], orient='index', columns=[list(dark_days_data.keys())[0]])
     for key in dark_days_data.keys():
         df2 = pd.DataFrame.from_dict(dark_days_data[key][1], orient='index', columns=[key])
@@ -56,13 +60,15 @@ def cities_coords(loc_table, df):
     df is a dataframe that is the output of param_data_per_loc_for_period
     
     '''
-    
     name_list = []
     coord_list = []
-    for index, row in loc_table.iterrows():
-        name_list.append(row['location'])
-        coord_list.append((row['coordinates.longitude'], row['coordinates.latitude']))
+    for (columnName, columnData) in df.iteritems():
+        for index, row in loc_table.iterrows():
+            if row['location'] in columnName:
+                name_list.append(columnName)
+                coord_list.append((row['coordinates.longitude'], row['coordinates.latitude']))
+         
     geometry = [Point(xy) for xy in coord_list]
     cities_coords = GeoDataFrame(name_list, geometry=geometry)
-    cities_coords = cities_coords[cities_coords[0].isin(df.columns)]
-    return cities_coords
+    cities_coords = cities_coords.drop_duplicates(subset=[0])
+    return cities_coords, coord_list

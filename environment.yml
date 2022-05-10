@@ -8,6 +8,7 @@ dependencies:
   - geopandas
   - Shapely
   - geoplot
+  - imageio
   - pip
   - pip:
     - py-openaq

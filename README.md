@@ -12,6 +12,7 @@ __GitHub Pages Link__:
 Start by using the following Make commands in your terminal:
 
 - To create the `aqproject` virtual environment: `make env` 
+- To install the `aqtools` module, navigate to the `aqtools` file and enter: `pip install .`
 - To remove any previous figure or data files from the project directory: `make clean`
 - To execute all of the Jupyter Notebooks and create the figures and data for the report: `make all`
 
@@ -20,7 +21,6 @@ Start by using the following Make commands in your terminal:
 
 To test the data, enter the following commands in your terminal:
 
-- To install the 
 - To activate the project's virtual environment: `conda activate aqproject` 
 - To run all tests on the functions used for visualization and data analysis: `pytest aqtools` 
 

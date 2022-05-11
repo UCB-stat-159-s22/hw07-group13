@@ -1,13 +1,13 @@
 This is a repo for the STAT 159/259 final project for group 13.
 
-![Alt Text](figures/mygif.gif)
+
+![Alt Text](figures/timelapsegif.gif)
+
 
 
 
 We need:
 
-
-- importable utility functions with tests and docstrings (min 2)
 
 - analysis notebooks containing all primary computations
 

@@ -11,6 +11,7 @@ all:
 clean:
 	rm -f $(wildcard figures/*.png)
 	rm -f $(wildcard data/*.pkl)
+	rm -f $(wildcard tables/*.csv)
 	#
 	# don't want to remove *.gif or *.GeoJSON because these take a really long time 
     

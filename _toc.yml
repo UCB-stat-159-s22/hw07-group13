@@ -3,6 +3,7 @@ root: Main
 parts:
 - caption: Analysis Notebooks
   chapters:
-  - file: MainAnalysis
   - file: ExplorationAndVisualization
   - file: modelling
+  - file: MainAnalysis
+

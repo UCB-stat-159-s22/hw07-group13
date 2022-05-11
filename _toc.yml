@@ -1,0 +1,8 @@
+format: jb-book
+root: Main
+parts:
+- caption: Analysis Notebooks
+  chapters:
+  - file: MainAnalysis
+  - file: ExplorationAndVisualization
+  - file: modelling

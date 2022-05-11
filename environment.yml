@@ -1,7 +1,9 @@
 name: aqproject
+channels:
+  - conda-forge
 dependencies:
   - ipykernel
-  - python=3.8
+  - conda-forge::python=3.9
   - numpy
   - pandas
   - seaborn
@@ -13,7 +15,7 @@ dependencies:
   - scipy
   - matplotlib
   - scikit-learn
-  - tensorflow=2.7
+  - conda-forge::tensorflow
   - pip
   - pip:
     - py-openaq

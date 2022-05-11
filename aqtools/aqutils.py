@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 import pytz
 
-AQI_BREAKPOINTS = './aqtools/aqi_breakpoints.csv'
+AQI_BREAKPOINTS = './data/aqi_breakpoints.csv'
 
 
 def utc_to_pst(date_str):

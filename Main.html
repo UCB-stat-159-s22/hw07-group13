@@ -428,19 +428,19 @@
     </tr>
     <tr>
       <th>lastUpdated</th>
-      <td>2022-05-11 01:00:00+00:00</td>
+      <td>2022-05-11 14:00:00+00:00</td>
     </tr>
     <tr>
       <th>parameters</th>
-      <td>[co, no2, pm25, o3]</td>
+      <td>[no2, pm25, o3, co]</td>
     </tr>
     <tr>
       <th>countsByMeasurement</th>
-      <td>[{'parameter': 'co', 'count': 91951}, {'parame...</td>
+      <td>[{'parameter': 'no2', 'count': 90138}, {'param...</td>
     </tr>
     <tr>
       <th>count</th>
-      <td>371070</td>
+      <td>371217</td>
     </tr>
     <tr>
       <th>coordinates.latitude</th>
@@ -730,7 +730,220 @@
 </div>
 <div class="section" id="analysis-ii-predicting-concentrations-of-pm-sub-2-5-sub">
 <h2>Analysis II: Predicting Concentrations of PM<sub>2.5</sub><a class="headerlink" href="#analysis-ii-predicting-concentrations-of-pm-sub-2-5-sub" title="Permalink to this headline">¶</a></h2>
-<p>Text</p>
+<p>Neural networks were used to attempt to predict PM<sub>2.5</sub> concentrations based on the concentrations of other pollutants, as well as atmospheric factors like wind speed and relative humidity. Air quality data was queried from the OpenAQ API for the Oakland Air Quality Station for the period of 09/01/2021 to 03/01/2022. Atmospheric data was queried from the NOAA API for the same location and date range. Approximately 10% of the dataset was reserved for model testing, while the other 90% was used for model training and validation.</p>
+<p>A first predictive model using Gated Recurrent Unit Neural Network was developing using only air quality data (i.e., predicting the PM<sub>2.5</sub> concentration based on the concentrations of CO, NO<sub>2</sub>, and O<sub>3</sub>. First the air quality data were scaled and made stationary using the differencing technique, as shown in the figures below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/scaling_ver1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_34_0.png" src="_images/Main_34_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/differencing_ver1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_35_0.png" src="_images/Main_35_0.png" />
+</div>
+</div>
+<p>From the correlation table below, we can see that PM<sub>2.5</sub> has a slight negative correlation with CO and NO<sub>2</sub> and a slight positive correlation with O<sub>3</sub>. This could potentially mean that when CO and NO<sub>2</sub> are higher in magnitude, PM<sub>2.5</sub> concentration is lower, and when O<sub>3</sub> is high, PM<sub>2.5</sub> concentration is also high. That said, the correlations are so small that there is likely very little statistical connection between the quantities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tables/correlation_ver1.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>co</th>
+      <th>no2</th>
+      <th>o3</th>
+      <th>pm25</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>co</th>
+      <td>1.000000</td>
+      <td>0.673827</td>
+      <td>-0.623135</td>
+      <td>-0.118771</td>
+    </tr>
+    <tr>
+      <th>no2</th>
+      <td>0.673827</td>
+      <td>1.000000</td>
+      <td>-0.770821</td>
+      <td>-0.113108</td>
+    </tr>
+    <tr>
+      <th>o3</th>
+      <td>-0.623135</td>
+      <td>-0.770821</td>
+      <td>1.000000</td>
+      <td>0.080400</td>
+    </tr>
+    <tr>
+      <th>pm25</th>
+      <td>-0.118771</td>
+      <td>-0.113108</td>
+      <td>0.080400</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The figure below presents the first model’s prediction outcome based on the other air quality parameters. As we can see, in a coarse way, the model predicts the general sinusoidal shape of the concentrations, however, the individual timestep values are less informative.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/prediction_results_ver1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_39_0.png" src="_images/Main_39_0.png" />
+</div>
+</div>
+<p>A second model was developed to capture additional exogenous factors that might impact the concentration of particulate matter affecting air quality, namely conditions of the surrounding atmosphere like windspeed and relative humidity. Weather data was pulled from the NOAA API, and missing values were filled with the median value. One limitation with the data pulled from the NOAA API is that the API only made the previous seven days worth of data available for querying. For this reason, the second predictive model had a much smaller training dataset available.</p>
+<p>Once again, before model training, data were scaled and made stationary via the differencing method, as shown in the figures below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/scaling_ver2.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_41_0.png" src="_images/Main_41_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/differencing_ver2.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_42_0.png" src="_images/Main_42_0.png" />
+</div>
+</div>
+<p>As shown in the correlation table below, PM<sub>2.5</sub> has the same relationships with the other pollutants as found in the previous training dataset. In the new training dataset, there is a positive correlation between PM<sub>2.5</sub> and wind speed as well as between PM<sub>2.5</sub> and relative humidity and PM<sub>2.5</sub>. One limitation with the dataset is that wind speed and relative humidity are directly correlated with one another. In this sense, either wind speed <em>or</em> relative humidity could be selected as a feature, as each possesses the same explanatory power as the other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tables/correlation_ver2.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>co</th>
+      <th>no2</th>
+      <th>o3</th>
+      <th>wind speed</th>
+      <th>relative humidity</th>
+      <th>pm25</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>co</th>
+      <td>1.000000</td>
+      <td>0.682810</td>
+      <td>-0.638174</td>
+      <td>-0.638174</td>
+      <td>-0.638174</td>
+      <td>-0.284579</td>
+    </tr>
+    <tr>
+      <th>no2</th>
+      <td>0.682810</td>
+      <td>1.000000</td>
+      <td>-0.780167</td>
+      <td>-0.780167</td>
+      <td>-0.780167</td>
+      <td>-0.259517</td>
+    </tr>
+    <tr>
+      <th>o3</th>
+      <td>-0.638174</td>
+      <td>-0.780167</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.193921</td>
+    </tr>
+    <tr>
+      <th>wind speed</th>
+      <td>-0.638174</td>
+      <td>-0.780167</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.193921</td>
+    </tr>
+    <tr>
+      <th>relative humidity</th>
+      <td>-0.638174</td>
+      <td>-0.780167</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.193921</td>
+    </tr>
+    <tr>
+      <th>pm25</th>
+      <td>-0.284579</td>
+      <td>-0.259517</td>
+      <td>0.193921</td>
+      <td>0.193921</td>
+      <td>0.193921</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A neural network with the Gated Recurrent Unit mechanism was once again used to predict PM<sub>2.5</sub> concentrations from other air quality parameters and from atmospheric conditions.</p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>

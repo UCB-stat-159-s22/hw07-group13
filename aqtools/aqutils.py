@@ -1,7 +1,35 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
+import pytz
 
 AQI_BREAKPOINTS = './aqtools/aqi_breakpoints.csv'
+
+
+def utc_to_pst(date_str):
+    """Convert utc datetime to pst datetime
+
+    :param date_str: string type datatime format
+
+    :type data_str: string
+
+    :returns: string format pst datetime
+    """
+    d = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z').replace(minute=0)
+    return d.astimezone(pytz.timezone('US/Pacific')).strftime('%Y-%m-%d %H:%M:%S')
+
+
+def pst_to_utc(date_str):
+    """Convert pst datetime to utc datetime
+
+    :param date_str: string type datatime format
+
+    :type data_str: string
+
+    :returns: string format utc datetime
+    """
+    d = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z').replace(minute=0)
+    return d.astimezone(pytz.timezone('utc')).strftime('%Y-%m-%d %H:%M:%S')
 
 
 def get_aqi(pollutant, value):
@@ -14,12 +42,12 @@ def get_aqi(pollutant, value):
     :type method: float
     :returns: integer value of AQI
     """
-    pollutants = {'pm25': '88502',
-                  'co': '42101',
-                  'no2': '42602',
-                  'o3': '44201',
-                  'pm10': '81102',
-                  'so2': '42401'}
+    pollutants = {'pm25': 88502,
+                  'co': 42101,
+                  'no2': 42602,
+                  'o3': 44201,
+                  'pm10': 81102,
+                  'so2': 42401}
 
     p = pollutants[pollutant]
     df = pd.read_csv(AQI_BREAKPOINTS)
@@ -49,6 +77,27 @@ def extract_localdate(dates):
         local_date_clean = cleaning_date(local_date)
         local_dates.append(local_date_clean)
     return local_dates
+
+
+def date_pollutant_value(lst_of_dict, pollutant):
+    """Take openaq results and Transform data into dataframe with date, pollutant type, value
+
+    :param lst_of_dict: results from openaq.
+    :param pollutant: type of pollutant
+
+    :type lst_of_dict: list type
+    :type pollutant: string
+
+    :return: dataframe with date, type of pollutant and value columns
+    """
+    df = pd.DataFrame(data=lst_of_dict)
+    df['date'] = extract_localdate(df['date'].values)
+    df['date'] = pd.to_datetime(df['date'])
+    df = df.rename(columns={"value": pollutant})
+    df = df.loc[:, ['date', pollutant]]
+    df = df.iloc[::-1]
+    df = df[df[pollutant] >= 0]
+    return df
 
 
 def cleaning_date(s):

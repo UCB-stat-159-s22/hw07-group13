@@ -11,6 +11,11 @@ def utc_to_pst(date_str):
     return d.astimezone(pytz.timezone('US/Pacific')).strftime('%Y-%m-%d %H:%M:%S')
 
 
+def pst_to_utc(date_str):
+    d = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z').replace(minute=0)
+    return d.astimezone(pytz.timezone('utc')).strftime('%Y-%m-%d %H:%M:%S')
+
+
 def get_aqi(pollutant, value):
     """Get AQI corresponding pollutant and value
 

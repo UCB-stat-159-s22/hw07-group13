@@ -35,16 +35,23 @@ def get_aqi(pollutant, value):
 
 def cleaning_date(s):
     """Cleaning dateformat
-    :param s: list type string sequence
+    :param s: list type string sequence of date e.g. '2021-08-01T00:00:00Z'
 
-    :type endpoint: string
-    :type method: float
-    :returns: integer value of AQI
+    :type s: list, numpy array
+
+    :returns: list of clean format of date e.g. '2021-08-01 00:00:00'
     """
     return s[:-6].split('T')[0]+' ' + s[:-6].split('T')[1]
 
 
 def differencing(arr):
+    """Differencing for stationarity
+    :param arr: list type string sequences
+
+    :type arr: list, numpy array
+
+    :returns: list of stationary data
+    """
     diff_lst = []
     for i, v in enumerate(arr):
         if i == 0:

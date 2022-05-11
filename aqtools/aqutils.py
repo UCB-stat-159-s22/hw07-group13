@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
+import pytz
 
 AQI_BREAKPOINTS = './aqtools/aqi_breakpoints.csv'
+
+
+def utc_to_pst(date_str):
+    d = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z').replace(minute=0)
+    return d.astimezone(pytz.timezone('US/Pacific')).strftime('%Y-%m-%d %H:%M:%S')
 
 
 def get_aqi(pollutant, value):
@@ -79,4 +86,3 @@ def differencing(arr):
         diff = v - arr[i-1]
         diff_lst.append(diff)
     return diff_lst
-

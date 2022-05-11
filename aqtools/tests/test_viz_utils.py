@@ -54,7 +54,7 @@ def test_pointmap_single():
 
 def test_aqviz():
     bay_data = gpd.read_file('data/bayareadarkdays.geojson')
-    vu.aqviz(bay_data, pytest.shared4, '2020-09-06 17:00:00', 'pm25', save=True, save_loc='figures/testing_temp_figs/')
+    vu.aqviz(bay_data, pytest.shared4, region='Bay Area',date='2020-09-06 17:00:00', param='pm25', save=True, save_loc='figures/testing_temp_figs/')
     assert sum([File.endswith(".png") for File in os.listdir("figures/testing_temp_figs")]) == 1
     test = os.listdir('figures/testing_temp_figs')
     for item in test:

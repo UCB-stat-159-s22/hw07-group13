@@ -1,0 +1,2239 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploring and Visualizing OpenAQ Data &#8212; AQ Project Jupyter Book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analysing the dark day over San Francisco (Sep 9 2020)" href="modelling.html" />
+    <link rel="prev" title="Version 1" href="MainAnalysis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/orangeskies.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">AQ Project Jupyter Book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Main.html">
+   Exploring the Air Quality of the San Francisco Bay Area using OpenAQ
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Analysis Notebooks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="MainAnalysis.html">
+   Version 1
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Exploring and Visualizing OpenAQ Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="modelling.html">
+   Analysing the dark day over San Francisco (Sep 9 2020)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/ExplorationAndVisualization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/ExplorationAndVisualization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exploring and Visualizing OpenAQ Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="exploring-and-visualizing-openaq-data">
+<h1>Exploring and Visualizing OpenAQ Data<a class="headerlink" href="#exploring-and-visualizing-openaq-data" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">openaq</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">geopandas</span> <span class="kn">import</span> <span class="n">GeoDataFrame</span>
+
+<span class="kn">import</span> <span class="nn">geoplot</span> <span class="k">as</span> <span class="nn">gplt</span>
+<span class="kn">import</span> <span class="nn">geoplot.crs</span> <span class="k">as</span> <span class="nn">gcrs</span>
+
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">IPython</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="kn">from</span> <span class="nn">aqtools</span> <span class="kn">import</span> <span class="n">viz_utils</span> <span class="k">as</span> <span class="n">vu</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR 1: PROJ: proj_create_from_database: Open of /home/jovyan/envs/aqproject/share/proj failed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to True if you want to create the animated figures; it can crash the kernel from creating too many plots however</span>
+<span class="n">animate</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">openaq</span><span class="o">.</span><span class="n">OpenAQ</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sanfrancisco</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">locations</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sanfrancisco</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>city</th>
+      <th>cities</th>
+      <th>location</th>
+      <th>locations</th>
+      <th>sourceName</th>
+      <th>sourceNames</th>
+      <th>sourceType</th>
+      <th>sourceTypes</th>
+      <th>firstUpdated</th>
+      <th>lastUpdated</th>
+      <th>parameters</th>
+      <th>countsByMeasurement</th>
+      <th>count</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1311</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Laney College</td>
+      <td>[Laney College]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[bc, no2, pm25, co]</td>
+      <td>[{'parameter': 'bc', 'count': 98488}, {'parame...</td>
+      <td>382465</td>
+      <td>37.793624</td>
+      <td>-122.263376</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1518</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Livermore - Rincon</td>
+      <td>[Livermore - Rincon]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25, o3, bc, no2]</td>
+      <td>[{'parameter': 'pm25', 'count': 97215}, {'para...</td>
+      <td>373119</td>
+      <td>37.687526</td>
+      <td>-121.784217</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1520</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Bethel Island</td>
+      <td>[Bethel Island]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, so2, o3, co]</td>
+      <td>[{'parameter': 'no2', 'count': 87339}, {'param...</td>
+      <td>349902</td>
+      <td>38.006311</td>
+      <td>-121.641918</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1950</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Concord</td>
+      <td>[Concord]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25, no2, co, o3, so2]</td>
+      <td>[{'parameter': 'pm25', 'count': 95358}, {'para...</td>
+      <td>458098</td>
+      <td>37.938300</td>
+      <td>-122.025000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2001</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>San Ramon</td>
+      <td>[San Ramon]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-04-01 17:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 93595}, {'parame...</td>
+      <td>186989</td>
+      <td>37.743649</td>
+      <td>-121.934188</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2002</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>San Rafael</td>
+      <td>[San Rafael]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, co, pm25, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 92723}, {'parame...</td>
+      <td>372510</td>
+      <td>37.972200</td>
+      <td>-122.518900</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2003</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>San Pablo - Rumrill</td>
+      <td>[San Pablo - Rumrill]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25, co, so2, o3, no2]</td>
+      <td>[{'parameter': 'pm25', 'count': 93676}, {'para...</td>
+      <td>452238</td>
+      <td>37.960400</td>
+      <td>-122.357100</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2009</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>San Francisco</td>
+      <td>[San Francisco]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[co, no2, pm25, o3]</td>
+      <td>[{'parameter': 'co', 'count': 91951}, {'parame...</td>
+      <td>371070</td>
+      <td>37.765800</td>
+      <td>-122.397800</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2134</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Oakland</td>
+      <td>[Oakland]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, no2, co, pm25]</td>
+      <td>[{'parameter': 'o3', 'count': 93203}, {'parame...</td>
+      <td>375223</td>
+      <td>37.743061</td>
+      <td>-122.169907</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2135</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Oakland West</td>
+      <td>[Oakland West]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, co, so2, pm25, bc, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 90253}, {'parame...</td>
+      <td>539170</td>
+      <td>37.814800</td>
+      <td>-122.282402</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2152</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Redwood City</td>
+      <td>[Redwood City]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, co, o3, pm25]</td>
+      <td>[{'parameter': 'no2', 'count': 90807}, {'param...</td>
+      <td>372762</td>
+      <td>37.482800</td>
+      <td>-122.202200</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>8741</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Pleasanton - Owens C</td>
+      <td>[Pleasanton - Owens C]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2018-05-14 20:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25, co, no2]</td>
+      <td>[{'parameter': 'pm25', 'count': 79253}, {'para...</td>
+      <td>234229</td>
+      <td>37.701222</td>
+      <td>-121.903019</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>8769</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Richmond - 7th St</td>
+      <td>[Richmond - 7th St]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-07-26 13:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[so2]</td>
+      <td>[{'parameter': 'so2', 'count': 86965}]</td>
+      <td>86965</td>
+      <td>37.947800</td>
+      <td>-122.363600</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2035</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Hayward</td>
+      <td>[Hayward]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-04-01 16:00:00+00:00</td>
+      <td>2022-05-10 23:00:00+00:00</td>
+      <td>[o3]</td>
+      <td>[{'parameter': 'o3', 'count': 91964}]</td>
+      <td>91964</td>
+      <td>37.654700</td>
+      <td>-122.031700</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1021</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>[San Francisco-Oakland-Fremont]</td>
+      <td>Patterson Pass</td>
+      <td>[Patterson Pass]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2017-03-30 17:00:00+00:00</td>
+      <td>[o3, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 7054}, {'paramet...</td>
+      <td>13902</td>
+      <td>37.689615</td>
+      <td>-121.631916</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sanfrancisco</span><span class="p">[</span><span class="s1">&#39;coordinates.longitude&#39;</span><span class="p">],</span> <span class="n">sanfrancisco</span><span class="p">[</span><span class="s1">&#39;coordinates.latitude&#39;</span><span class="p">])]</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">sanfrancisco</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">)</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://data.sfgov.org/api/geospatial/s9wg-vcph?method=export&amp;format=Shapefile&quot;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Air Quality Sensor Location&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Air Quality Sensor Locations in San Francisco Bay Area&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/BAgeog.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_5_0.png" src="_images/ExplorationAndVisualization_5_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_file</span> <span class="o">=</span> <span class="n">sanfrancisco</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;San Francisco AQ Parameters&#39;</span><span class="p">})</span>
+<span class="n">param_file</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/paramdf.pkl&#39;</span><span class="p">)</span>
+<span class="n">param_file</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>San Francisco AQ Parameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>id</th>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>country</th>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>city</th>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>cities</th>
+      <td>[San Francisco-Oakland-Fremont]</td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td>San Francisco</td>
+    </tr>
+    <tr>
+      <th>locations</th>
+      <td>[San Francisco]</td>
+    </tr>
+    <tr>
+      <th>sourceName</th>
+      <td>AirNow</td>
+    </tr>
+    <tr>
+      <th>sourceNames</th>
+      <td>[AirNow]</td>
+    </tr>
+    <tr>
+      <th>sourceType</th>
+      <td>government</td>
+    </tr>
+    <tr>
+      <th>sourceTypes</th>
+      <td>[government]</td>
+    </tr>
+    <tr>
+      <th>firstUpdated</th>
+      <td>2016-03-06 19:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>lastUpdated</th>
+      <td>2022-05-11 01:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>parameters</th>
+      <td>[co, no2, pm25, o3]</td>
+    </tr>
+    <tr>
+      <th>countsByMeasurement</th>
+      <td>[{'parameter': 'co', 'count': 91951}, {'parame...</td>
+    </tr>
+    <tr>
+      <th>count</th>
+      <td>371070</td>
+    </tr>
+    <tr>
+      <th>coordinates.latitude</th>
+      <td>37.7658</td>
+    </tr>
+    <tr>
+      <th>coordinates.longitude</th>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>geometry</th>
+      <td>POINT (-122.3978 37.7658)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measure</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2022-05-03&#39;</span><span class="p">,</span>  <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2022-05-10&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Print out the statistics on a per-location basis</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">percentile</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">percentile_</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">percentile_</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">th percentile&#39;</span> <span class="o">%</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">percentile_</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;parameter&#39;</span><span class="p">])[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;min&quot;</span><span class="p">,</span>  <span class="n">percentile</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span><span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span><span class="n">percentile</span><span class="p">(</span><span class="mi">75</span><span class="p">),</span> <span class="s2">&quot;max&quot;</span><span class="p">])</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;data/weekstatsdf.pkl&#39;</span><span class="p">)</span>
+<span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min</th>
+      <th>25th percentile</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>75th percentile</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>parameter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bc</th>
+      <td>0.020</td>
+      <td>0.090</td>
+      <td>0.200</td>
+      <td>0.244613</td>
+      <td>0.315</td>
+      <td>1.170</td>
+    </tr>
+    <tr>
+      <th>co</th>
+      <td>0.120</td>
+      <td>0.220</td>
+      <td>0.280</td>
+      <td>0.312877</td>
+      <td>0.370</td>
+      <td>0.790</td>
+    </tr>
+    <tr>
+      <th>no2</th>
+      <td>0.000</td>
+      <td>0.002</td>
+      <td>0.004</td>
+      <td>0.005016</td>
+      <td>0.006</td>
+      <td>0.036</td>
+    </tr>
+    <tr>
+      <th>o3</th>
+      <td>0.003</td>
+      <td>0.025</td>
+      <td>0.034</td>
+      <td>0.032220</td>
+      <td>0.039</td>
+      <td>0.063</td>
+    </tr>
+    <tr>
+      <th>pm25</th>
+      <td>-3.000</td>
+      <td>4.000</td>
+      <td>6.000</td>
+      <td>6.339687</td>
+      <td>8.000</td>
+      <td>43.000</td>
+    </tr>
+    <tr>
+      <th>so2</th>
+      <td>-0.001</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000491</td>
+      <td>0.001</td>
+      <td>0.012</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm25measure</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;pm25&quot;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2022-05-03&#39;</span><span class="p">,</span>  <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2022-05-10&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm25measure</span> <span class="o">=</span> <span class="n">pm25measure</span><span class="p">[</span><span class="n">pm25measure</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pm25&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_days_BA</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;pm25&quot;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_days_BA</span> <span class="o">=</span> <span class="n">dark_days_BA</span><span class="p">[</span><span class="n">dark_days_BA</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pm25&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">pm25measure</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">):</span>
+    <span class="c1"># Query the data to only get positive values and resample to hourly</span>
+    <span class="n">_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">_df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$  [$\mu g m^{-3}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$ Measurements in SF Bay Area (05/03/2022 - 05/10/2022)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.92</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/PM25TSthisweek.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_13_0.png" src="_images/ExplorationAndVisualization_13_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">pm25measure</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">):</span>
+    <span class="c1"># Query the data to only get positive values and resample to hourly</span>
+    <span class="n">_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">_df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dark_days_BA</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">):</span>
+    <span class="c1"># Query the data to only get positive values and resample to hourly</span>
+    <span class="n">_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">_df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$  [$\mu g m^{-3}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$  [$\mu g m^{-3}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;09/07/2020 to 09/17/2020&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;05/03/2022 to 05/10/2022&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$ Measurements in SF Bay Area&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/PM25TScompare.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_14_0.png" src="_images/ExplorationAndVisualization_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">pm25measure</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">),</span>
+    <span class="n">fliersize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">\;[\mu gm^{-3}]$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$ Measurements in SF Bay Area (05/03/2022 - 05/10/2022)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.92</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/PM25Boxthisweek.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_15_0.png" src="_images/ExplorationAndVisualization_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">pm25measure</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">),</span>
+    <span class="n">fliersize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dark_days_BA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;value &gt;= 0.0&quot;</span><span class="p">),</span>
+    <span class="n">fliersize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax1</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$  [$\mu g m^{-3}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$  [$\mu g m^{-3}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;09/07/2020 to 09/17/2020&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;05/03/2022 to 05/10/2022&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">$ Measurements in SF Bay Area&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/PM25Boxcompare.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_16_0.png" src="_images/ExplorationAndVisualization_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_day_sf_pm25</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;pm25&#39;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">dark_day_sf_pm25</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>location</th>
+      <th>parameter</th>
+      <th>value</th>
+      <th>unit</th>
+      <th>country</th>
+      <th>city</th>
+      <th>date.utc</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+    <tr>
+      <th>date.local</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-09-16 17:00:00</th>
+      <td>San Francisco</td>
+      <td>pm25</td>
+      <td>-2</td>
+      <td>b'\xc2\xb5g/m\xc2\xb3'</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>2020-09-17 00:00:00+00:00</td>
+      <td>37.7658</td>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>2020-09-16 16:00:00</th>
+      <td>San Francisco</td>
+      <td>pm25</td>
+      <td>-1</td>
+      <td>b'\xc2\xb5g/m\xc2\xb3'</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>2020-09-16 23:00:00+00:00</td>
+      <td>37.7658</td>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>2020-09-16 15:00:00</th>
+      <td>San Francisco</td>
+      <td>pm25</td>
+      <td>1</td>
+      <td>b'\xc2\xb5g/m\xc2\xb3'</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>2020-09-16 22:00:00+00:00</td>
+      <td>37.7658</td>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>2020-09-16 14:00:00</th>
+      <td>San Francisco</td>
+      <td>pm25</td>
+      <td>0</td>
+      <td>b'\xc2\xb5g/m\xc2\xb3'</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>2020-09-16 21:00:00+00:00</td>
+      <td>37.7658</td>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>2020-09-16 09:00:00</th>
+      <td>San Francisco</td>
+      <td>pm25</td>
+      <td>7</td>
+      <td>b'\xc2\xb5g/m\xc2\xb3'</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+      <td>2020-09-16 16:00:00+00:00</td>
+      <td>37.7658</td>
+      <td>-122.3978</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dark_day_sf_pm25</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dark_day_sf_pm25</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">8.27</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">11.7</span><span class="o">/</span><span class="mf">8.27</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+<span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;.7&quot;</span><span class="p">,</span> <span class="n">dashes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="s2">&quot;$PM_</span><span class="si">{2.5}</span><span class="s2">\;[\mu gm^{-3}]$&quot;</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">w_pad</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;SF Particulate Matter 2.5 from Sept 7th to Sept 17th 2020&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/SFTS.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_18_0.png" src="_images/ExplorationAndVisualization_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">USlocs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">locations</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">USlocs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>city</th>
+      <th>cities</th>
+      <th>location</th>
+      <th>locations</th>
+      <th>sourceName</th>
+      <th>sourceNames</th>
+      <th>sourceType</th>
+      <th>sourceTypes</th>
+      <th>firstUpdated</th>
+      <th>lastUpdated</th>
+      <th>parameters</th>
+      <th>countsByMeasurement</th>
+      <th>count</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>234</td>
+      <td>US</td>
+      <td>WALLOWA</td>
+      <td>[WALLOWA]</td>
+      <td>Enterprise - US Fore</td>
+      <td>[Enterprise - US Fore]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-10 08:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25]</td>
+      <td>[{'parameter': 'pm25', 'count': 80854}]</td>
+      <td>80854</td>
+      <td>45.426351</td>
+      <td>-117.296066</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>244</td>
+      <td>US</td>
+      <td>Kansas City</td>
+      <td>[Kansas City]</td>
+      <td>LIBERTY</td>
+      <td>[LIBERTY]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, pm25]</td>
+      <td>[{'parameter': 'o3', 'count': 64713}, {'parame...</td>
+      <td>160119</td>
+      <td>39.303056</td>
+      <td>-94.376389</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>255</td>
+      <td>US</td>
+      <td>MONROE</td>
+      <td>[MONROE]</td>
+      <td>MTSP</td>
+      <td>[MTSP]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm10, so2, o3, no2]</td>
+      <td>[{'parameter': 'pm10', 'count': 97551}, {'para...</td>
+      <td>382888</td>
+      <td>39.475100</td>
+      <td>-91.788990</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>257</td>
+      <td>US</td>
+      <td>ANDREW</td>
+      <td>[ANDREW]</td>
+      <td>SAVANNAH</td>
+      <td>[SAVANNAH]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3]</td>
+      <td>[{'parameter': 'o3', 'count': 66330}]</td>
+      <td>66330</td>
+      <td>39.954400</td>
+      <td>-94.849000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>259</td>
+      <td>US</td>
+      <td>Kansas City</td>
+      <td>[Kansas City]</td>
+      <td>Troost</td>
+      <td>[Troost]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, pm10, so2, pm25]</td>
+      <td>[{'parameter': 'no2', 'count': 95138}, {'param...</td>
+      <td>348298</td>
+      <td>39.104650</td>
+      <td>-94.570550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bay_area_locs</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">location_filter</span><span class="p">(</span><span class="n">USlocs</span><span class="p">,</span> <span class="n">minlat</span> <span class="o">=</span> <span class="mf">36.</span><span class="p">,</span> <span class="n">minlon</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.5</span><span class="p">,</span> <span class="n">maxlat</span><span class="o">=</span><span class="mf">39.</span><span class="p">,</span> <span class="n">maxlon</span> <span class="o">=</span> <span class="o">-</span><span class="mi">121</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">)</span> 
+<span class="n">bay_area_locs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>city</th>
+      <th>cities</th>
+      <th>location</th>
+      <th>locations</th>
+      <th>sourceName</th>
+      <th>sourceNames</th>
+      <th>sourceType</th>
+      <th>sourceTypes</th>
+      <th>firstUpdated</th>
+      <th>lastUpdated</th>
+      <th>parameters</th>
+      <th>countsByMeasurement</th>
+      <th>count</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>111</th>
+      <td>1280</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Antelope - North Hig</td>
+      <td>[Antelope - North Hig]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, o3, co]</td>
+      <td>[{'parameter': 'no2', 'count': 5670}, {'parame...</td>
+      <td>153951</td>
+      <td>38.712090</td>
+      <td>-121.381090</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>1289</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Arden Arcade - Del P</td>
+      <td>[Arden Arcade - Del P]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-10 07:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[so2, no2, bc, pm25, co, o3]</td>
+      <td>[{'parameter': 'so2', 'count': 92756}, {'param...</td>
+      <td>563370</td>
+      <td>38.613804</td>
+      <td>-121.368007</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>1391</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Folsom</td>
+      <td>[Folsom]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, pm25, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 67684}, {'parame...</td>
+      <td>199318</td>
+      <td>38.683304</td>
+      <td>-121.164457</td>
+    </tr>
+    <tr>
+      <th>323</th>
+      <td>2189</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Elk Grove</td>
+      <td>[Elk Grove]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, o3, pm25]</td>
+      <td>[{'parameter': 'no2', 'count': 86274}, {'param...</td>
+      <td>285408</td>
+      <td>38.302591</td>
+      <td>-121.420838</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>2643</td>
+      <td>US</td>
+      <td>Santa Cruz-Watsonville</td>
+      <td>[Santa Cruz-Watsonville]</td>
+      <td>SLV Middle School AM</td>
+      <td>[SLV Middle School, SLV Middle School AM]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-07-28 23:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25]</td>
+      <td>[{'parameter': 'pm25', 'count': 32873}]</td>
+      <td>32873</td>
+      <td>37.063150</td>
+      <td>-122.083092</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">param_data_per_loc_for_period</span><span class="p">(</span><span class="n">bay_area_locs</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span> <span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;pm25&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">USlocs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">locations</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">USlocs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>city</th>
+      <th>cities</th>
+      <th>location</th>
+      <th>locations</th>
+      <th>sourceName</th>
+      <th>sourceNames</th>
+      <th>sourceType</th>
+      <th>sourceTypes</th>
+      <th>firstUpdated</th>
+      <th>lastUpdated</th>
+      <th>parameters</th>
+      <th>countsByMeasurement</th>
+      <th>count</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>234</td>
+      <td>US</td>
+      <td>WALLOWA</td>
+      <td>[WALLOWA]</td>
+      <td>Enterprise - US Fore</td>
+      <td>[Enterprise - US Fore]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-10 08:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25]</td>
+      <td>[{'parameter': 'pm25', 'count': 80854}]</td>
+      <td>80854</td>
+      <td>45.426351</td>
+      <td>-117.296066</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>244</td>
+      <td>US</td>
+      <td>Kansas City</td>
+      <td>[Kansas City]</td>
+      <td>LIBERTY</td>
+      <td>[LIBERTY]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, pm25]</td>
+      <td>[{'parameter': 'o3', 'count': 64713}, {'parame...</td>
+      <td>160119</td>
+      <td>39.303056</td>
+      <td>-94.376389</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>255</td>
+      <td>US</td>
+      <td>MONROE</td>
+      <td>[MONROE]</td>
+      <td>MTSP</td>
+      <td>[MTSP]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm10, so2, o3, no2]</td>
+      <td>[{'parameter': 'pm10', 'count': 97551}, {'para...</td>
+      <td>382888</td>
+      <td>39.475100</td>
+      <td>-91.788990</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>257</td>
+      <td>US</td>
+      <td>ANDREW</td>
+      <td>[ANDREW]</td>
+      <td>SAVANNAH</td>
+      <td>[SAVANNAH]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3]</td>
+      <td>[{'parameter': 'o3', 'count': 66330}]</td>
+      <td>66330</td>
+      <td>39.954400</td>
+      <td>-94.849000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>259</td>
+      <td>US</td>
+      <td>Kansas City</td>
+      <td>[Kansas City]</td>
+      <td>Troost</td>
+      <td>[Troost]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, pm10, so2, pm25]</td>
+      <td>[{'parameter': 'no2', 'count': 95138}, {'param...</td>
+      <td>348298</td>
+      <td>39.104650</td>
+      <td>-94.570550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bay_area_locs</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">location_filter</span><span class="p">(</span><span class="n">USlocs</span><span class="p">,</span> <span class="n">minlat</span> <span class="o">=</span> <span class="mf">36.</span><span class="p">,</span> <span class="n">minlon</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.5</span><span class="p">,</span> <span class="n">maxlat</span><span class="o">=</span><span class="mf">39.</span><span class="p">,</span> <span class="n">maxlon</span> <span class="o">=</span> <span class="o">-</span><span class="mi">121</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">)</span> 
+<span class="n">bay_area_locs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>city</th>
+      <th>cities</th>
+      <th>location</th>
+      <th>locations</th>
+      <th>sourceName</th>
+      <th>sourceNames</th>
+      <th>sourceType</th>
+      <th>sourceTypes</th>
+      <th>firstUpdated</th>
+      <th>lastUpdated</th>
+      <th>parameters</th>
+      <th>countsByMeasurement</th>
+      <th>count</th>
+      <th>coordinates.latitude</th>
+      <th>coordinates.longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>111</th>
+      <td>1280</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Antelope - North Hig</td>
+      <td>[Antelope - North Hig]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, o3, co]</td>
+      <td>[{'parameter': 'no2', 'count': 5670}, {'parame...</td>
+      <td>153951</td>
+      <td>38.712090</td>
+      <td>-121.381090</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>1289</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Arden Arcade - Del P</td>
+      <td>[Arden Arcade - Del P]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-10 07:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[so2, no2, bc, pm25, co, o3]</td>
+      <td>[{'parameter': 'so2', 'count': 92756}, {'param...</td>
+      <td>563370</td>
+      <td>38.613804</td>
+      <td>-121.368007</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>1391</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Folsom</td>
+      <td>[Folsom]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[o3, pm25, no2]</td>
+      <td>[{'parameter': 'o3', 'count': 67684}, {'parame...</td>
+      <td>199318</td>
+      <td>38.683304</td>
+      <td>-121.164457</td>
+    </tr>
+    <tr>
+      <th>323</th>
+      <td>2189</td>
+      <td>US</td>
+      <td>Sacramento--Arden-Arcade--Roseville</td>
+      <td>[Sacramento--Arden-Arcade--Roseville]</td>
+      <td>Elk Grove</td>
+      <td>[Elk Grove]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-03-06 19:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[no2, o3, pm25]</td>
+      <td>[{'parameter': 'no2', 'count': 86274}, {'param...</td>
+      <td>285408</td>
+      <td>38.302591</td>
+      <td>-121.420838</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>2643</td>
+      <td>US</td>
+      <td>Santa Cruz-Watsonville</td>
+      <td>[Santa Cruz-Watsonville]</td>
+      <td>SLV Middle School AM</td>
+      <td>[SLV Middle School, SLV Middle School AM]</td>
+      <td>AirNow</td>
+      <td>[AirNow]</td>
+      <td>government</td>
+      <td>[government]</td>
+      <td>2016-07-28 23:00:00+00:00</td>
+      <td>2022-05-11 01:00:00+00:00</td>
+      <td>[pm25]</td>
+      <td>[{'parameter': 'pm25', 'count': 32873}]</td>
+      <td>32873</td>
+      <td>37.063150</td>
+      <td>-122.083092</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">param_data_per_loc_for_period</span><span class="p">(</span><span class="n">bay_area_locs</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span> <span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;pm25&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Arden Arcade - Del P</th>
+      <th>Elk Grove</th>
+      <th>SLV Middle School AM</th>
+      <th>King City AMS</th>
+      <th>Hollister AMS</th>
+      <th>Carmel Valley AMS</th>
+      <th>Salinas AMS</th>
+      <th>Santa Cruz AMS</th>
+      <th>Woodland</th>
+      <th>Vacaville</th>
+      <th>...</th>
+      <th>Berkeley Aquatic Par</th>
+      <th>Napa - Napa Valley C</th>
+      <th>MBARD Office - Monte</th>
+      <th>Watsonville</th>
+      <th>Big Sur Ranger Stati</th>
+      <th>Soledad</th>
+      <th>Greenfield</th>
+      <th>Gonzales</th>
+      <th>Soledad_774711</th>
+      <th>Gonzales_321290</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-09-06 17:00:00</th>
+      <td>27.000000</td>
+      <td>76.0</td>
+      <td>13.0</td>
+      <td>27.0</td>
+      <td>22.0</td>
+      <td>31.0</td>
+      <td>29.0</td>
+      <td>27.0</td>
+      <td>56.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>27.0</td>
+      <td>31.0</td>
+      <td>26.0</td>
+      <td>42.0</td>
+      <td>19.0</td>
+      <td>29.0</td>
+      <td>15.0</td>
+      <td>36.0</td>
+      <td>29.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>2020-09-06 19:00:00</th>
+      <td>26.666667</td>
+      <td>76.0</td>
+      <td>13.0</td>
+      <td>34.0</td>
+      <td>62.0</td>
+      <td>43.0</td>
+      <td>40.0</td>
+      <td>30.0</td>
+      <td>63.0</td>
+      <td>64.0</td>
+      <td>...</td>
+      <td>22.0</td>
+      <td>19.0</td>
+      <td>0.0</td>
+      <td>42.0</td>
+      <td>24.0</td>
+      <td>55.0</td>
+      <td>50.0</td>
+      <td>39.0</td>
+      <td>55.0</td>
+      <td>39.0</td>
+    </tr>
+    <tr>
+      <th>2020-09-06 20:00:00</th>
+      <td>26.333333</td>
+      <td>76.0</td>
+      <td>13.0</td>
+      <td>42.0</td>
+      <td>72.0</td>
+      <td>36.0</td>
+      <td>40.0</td>
+      <td>31.0</td>
+      <td>64.0</td>
+      <td>70.0</td>
+      <td>...</td>
+      <td>23.5</td>
+      <td>19.0</td>
+      <td>9.0</td>
+      <td>42.0</td>
+      <td>23.5</td>
+      <td>49.0</td>
+      <td>10.0</td>
+      <td>41.0</td>
+      <td>49.0</td>
+      <td>41.0</td>
+    </tr>
+    <tr>
+      <th>2020-09-06 21:00:00</th>
+      <td>26.000000</td>
+      <td>65.5</td>
+      <td>13.0</td>
+      <td>39.0</td>
+      <td>70.0</td>
+      <td>28.0</td>
+      <td>25.0</td>
+      <td>28.0</td>
+      <td>65.0</td>
+      <td>76.0</td>
+      <td>...</td>
+      <td>25.0</td>
+      <td>19.0</td>
+      <td>18.0</td>
+      <td>42.0</td>
+      <td>23.0</td>
+      <td>43.0</td>
+      <td>44.0</td>
+      <td>43.0</td>
+      <td>43.0</td>
+      <td>43.0</td>
+    </tr>
+    <tr>
+      <th>2020-09-06 22:00:00</th>
+      <td>39.000000</td>
+      <td>55.0</td>
+      <td>13.0</td>
+      <td>40.0</td>
+      <td>68.0</td>
+      <td>21.0</td>
+      <td>27.0</td>
+      <td>27.0</td>
+      <td>63.0</td>
+      <td>77.0</td>
+      <td>...</td>
+      <td>22.0</td>
+      <td>27.0</td>
+      <td>28.0</td>
+      <td>42.0</td>
+      <td>21.0</td>
+      <td>48.0</td>
+      <td>46.0</td>
+      <td>43.0</td>
+      <td>48.0</td>
+      <td>43.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 46 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_coordinates</span><span class="p">,</span> <span class="n">coord_list</span>  <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">cities_coords</span><span class="p">(</span><span class="n">bay_area_locs</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_coordinates</span><span class="p">,</span> <span class="n">coord_list</span>  <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">cities_coords</span><span class="p">(</span><span class="n">bay_area_locs</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_days_data</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">merge_and_save_gdf</span><span class="p">(</span><span class="n">cities_coordinates</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;data/bayareadarkdays.geojson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bay_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;data/bayareadarkdays.geojson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">col_list</span> <span class="o">=</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">dark_day_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;2020-09-09&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+<span class="n">dark_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;2020-09-10 15:00:00&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">col_list</span> <span class="o">=</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">dark_day_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;2020-09-09&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+<span class="n">dark_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">bay_data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;2020-09-10 15:00:00&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">single</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">pointmap_single</span><span class="p">(</span><span class="n">loc_name</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">bay_data</span><span class="p">,</span> <span class="n">date1</span><span class="o">=</span><span class="n">col_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">basemap</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="n">center_lat</span><span class="o">=</span><span class="mf">37.8711428</span><span class="p">,</span> <span class="n">center_lon</span><span class="o">=-</span><span class="mf">122.3714777</span><span class="p">,</span>
+                 <span class="n">color_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color_max</span><span class="o">=</span><span class="mi">342</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=-</span><span class="mi">50000</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=-</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">min_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_32_0.png" src="_images/ExplorationAndVisualization_32_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compare</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">pointmap_compare</span><span class="p">(</span><span class="n">bay_data</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">loc_name</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">date1</span><span class="o">=</span><span class="s1">&#39;2020-09-06 19:00:00&#39;</span><span class="p">,</span> <span class="n">date2</span><span class="o">=</span><span class="s1">&#39;2020-09-16 19:00:00&#39;</span><span class="p">,</span> <span class="n">center_lat</span><span class="o">=</span><span class="mf">37.8711428</span><span class="p">,</span> <span class="n">center_lon</span><span class="o">=-</span><span class="mf">122.3714777</span><span class="p">,</span>
+                 <span class="n">color_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color_max</span><span class="o">=</span><span class="mi">342</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=-</span><span class="mi">50000</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=-</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">min_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_33_0.png" src="_images/ExplorationAndVisualization_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">animate</span><span class="p">:</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">j</span><span class="o">=</span><span class="mi">6</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+        <span class="c1"># plot the line chart</span>
+        <span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="o">+</span><span class="n">i</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">date_to_use</span> <span class="o">=</span> <span class="s1">&#39;2020-09-0&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; 19:00:00&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">date_to_use</span> <span class="o">=</span> <span class="s1">&#39;2020-09-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; 19:00:00&#39;</span>
+        <span class="n">vu</span><span class="o">.</span><span class="n">pointmap_single</span><span class="p">(</span><span class="n">loc_name</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">bay_data</span><span class="p">,</span> <span class="n">date1</span><span class="o">=</span><span class="n">date_to_use</span><span class="p">,</span> <span class="n">basemap</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="n">center_lat</span><span class="o">=</span><span class="mf">37.8711428</span><span class="p">,</span> <span class="n">center_lon</span><span class="o">=-</span><span class="mf">122.3714777</span><span class="p">,</span>
+                 <span class="n">color_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color_max</span><span class="o">=</span><span class="mi">342</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=-</span><span class="mi">50000</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=-</span><span class="mi">60000</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">min_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+
+<span class="c1">#         # create file name and append it to a list</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;figures/animation_frames/simpleframe_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">#         # save frame</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">imageio</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="s1">&#39;figures/simpletimelapsegif.gif&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vu</span><span class="o">.</span><span class="n">aqviz</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">bay_data</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;2020-09-10 17:00:00&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/ExplorationAndVisualization_35_1.png" src="_images/ExplorationAndVisualization_35_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">animate</span><span class="p">:</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">col_list</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># plot the line chart</span>
+        <span class="n">vu</span><span class="o">.</span><span class="n">aqviz</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">bay_data</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">col_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+
+<span class="c1">#         # create file name and append it to a list</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;figures/animation_frames/CAframe_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">#         # save frame</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">imageio</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="s1">&#39;figures/CAtimelapsegif.gif&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;figures/timelapsegif.gif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Commented out so we don&#39;t make too many API calls</span>
+
+<span class="c1"># filtered_CA_locs = vu.location_filter(USlocs, minlat = 32, minlon = -124, maxlat=42, maxlon = -114, starttime=&#39;2020-09-07&#39;, endtime=&#39;2020-09-17&#39;) </span>
+<span class="c1"># CA_df = vu.param_data_per_loc_for_period(filtered_CA_locs, start_date= &#39;2020-09-07&#39;, end_date=&#39;2020-09-17&#39;, param=&#39;pm25&#39;, limit=1000, interpolate=True)</span>
+<span class="c1"># cities_coordinates, coord_list = vu.cities_coords(filtered_CA_locs, CA_df)</span>
+<span class="c1"># CA_dark_days_data = vu.merge_and_save_gdf(cities_coords=cities_coordinates, data=CA_df, save=True, filename=&#39;data/CAdarkdays.geojson&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># with open(&quot;data/file.json&quot;, &#39;w&#39;) as f:</span>
+<span class="c1">#     json.dump(coord_list, f, indent=2) </span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/file.json&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">coord_list</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+<span class="n">CA_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;data/CAdarkdays.geojson&#39;</span><span class="p">)</span>
+<span class="n">col_list</span> <span class="o">=</span> <span class="n">CA_data</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">vu</span><span class="o">.</span><span class="n">aqviz</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">CA_data</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;California&#39;</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">dark_max</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/ExplorationAndVisualization_40_1.png" src="_images/ExplorationAndVisualization_40_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">animate</span><span class="p">:</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">col_list</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># plot the line chart</span>
+        <span class="n">vu</span><span class="o">.</span><span class="n">aqviz</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">CA_data</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">col_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
+
+<span class="c1">#         # create file name and append it to a list</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;figures/animation_frames/CAframe_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">#         # save frame</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">imageio</span><span class="o">.</span><span class="n">get_writer</span><span class="p">(</span><span class="s1">&#39;figures/CAtimelapsegif.gif&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;figures/CAtimelapsegif.gif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "aqproject"
+        },
+        kernelOptions: {
+            kernelName: "aqproject",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'aqproject'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="MainAnalysis.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Version 1</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="modelling.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analysing the dark day over San Francisco (Sep 9 2020)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Wesley Darling, Gyuhyeon Seo, Jae Hee Koh, Ram Mukund Kripa<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

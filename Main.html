@@ -1,0 +1,707 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploring the Air Quality of the San Francisco Bay Area using OpenAQ &#8212; AQ Project Jupyter Book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version 1" href="MainAnalysis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/orangeskies.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">AQ Project Jupyter Book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
+  <a class="reference internal" href="#">
+   Exploring the Air Quality of the San Francisco Bay Area using OpenAQ
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Analysis Notebooks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="MainAnalysis.html">
+   Version 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ExplorationAndVisualization.html">
+   Exploring and Visualizing OpenAQ Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="modelling.html">
+   Analysing the dark day over San Francisco (Sep 9 2020)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Main.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Main.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stat-159-259-final-project">
+   STAT 159/259 Final Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-motivation">
+   Project Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020">
+   Visualization of SF Bay Area Air Quality During Wildfire Period (09/07/2020 to 09/17/2020)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-i-prediction-of-future-dark-days">
+   Analysis I: Prediction of Future “Dark Days”
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-ii-report-from-gyuhyeon">
+   Analysis II: Report from Gyuhyeon
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#author-contributions">
+   Author Contributions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exploring the Air Quality of the San Francisco Bay Area using OpenAQ</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stat-159-259-final-project">
+   STAT 159/259 Final Project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-motivation">
+   Project Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data Exploration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020">
+   Visualization of SF Bay Area Air Quality During Wildfire Period (09/07/2020 to 09/17/2020)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-i-prediction-of-future-dark-days">
+   Analysis I: Prediction of Future “Dark Days”
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-ii-report-from-gyuhyeon">
+   Analysis II: Report from Gyuhyeon
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#author-contributions">
+   Author Contributions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="exploring-the-air-quality-of-the-san-francisco-bay-area-using-openaq">
+<h1>Exploring the Air Quality of the San Francisco Bay Area using OpenAQ<a class="headerlink" href="#exploring-the-air-quality-of-the-san-francisco-bay-area-using-openaq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stat-159-259-final-project">
+<h2>STAT 159/259 Final Project<a class="headerlink" href="#stat-159-259-final-project" title="Permalink to this headline">¶</a></h2>
+<p>Authors: Wesley Darling, Gyuhyeon Seo, Ram Kripa, Jae Hee Koh</p>
+</div>
+<div class="section" id="project-motivation">
+<h2>Project Motivation<a class="headerlink" href="#project-motivation" title="Permalink to this headline">¶</a></h2>
+<p>On September 9th, 2020, in the midst of the COVID-19 pandemic and wildfires up and down the State of California, residents of the San Francisco Bay Area woke up to a shocking sight:</p>
+<center><img src="https://s.hdnux.com/photos/01/14/04/25/19940696/15/rawImage.jpg" width="700" height="700" /></center>
+<p>The smoke from the multiple wildfires taking place inland had been carried by air currents into the Bay Area, causing the sunlight to refract and obscure in a way that made the sky orange. For those of us that were in the Bay Area on that day, it’s impossible to forget the experience of waking up and expecting the lovely California sunshine and instead finding yourself waking to a hellish-looking sky. So often we forget about what air quality truly means, going about our day and taking it for granted. That day was a wakeup call that, if we continue to neglect our environment in the way we have been, days like September 9th, 2020 may become all the more common. In fact, poor air quality is the leading cause of death for more than 1 in 8 people, and air pollution is the <a class="reference external" href="https://openaq.org/#/why">4th largest risk factor to human health worldwide</a>. It is of the utmost importance that air and the factors negatively affecting its quality be sufficiently monitored and understood by those who breath it (i.e., <em><strong>everyone</strong></em>).</p>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>With this motivation in mind, we decided to focus the work of our project on exploring the air quality of the San Francisco Bay Area, taking a look at that specific Dark Day (9/9/2020) as well as the current air quality status of the area. For this project, we used the <a class="reference external" href="https://openaq.org/#/">OpenAQ dataset</a>, a repository of air quality data collected from 49,000 locations worldwide that is freely available and open to the public. Using the <a class="reference external" href="https://github.com/dhhagan/py-openaq"><code class="docutils literal notranslate"><span class="pre">py-openaq</span></code> module</a> to easily make data requests from the OpenAQ API and a variety of utility functions we developed ourselves (available in the <code class="docutils literal notranslate"><span class="pre">aq</span> <span class="pre">tools</span></code> folder), we explored, visualized, and analyzed OpenAQ data related to the San Francisco Bay Area. We chose to focus on the Bay Area for tractability purposes (it limits the number of API calls necessary – requesting data for the entire USA led to issues with overwhelming the API) and because it is a location both with which we are familiar and of which we care about the well-being. This report begins with an exploration of the data available and then continues into a visualization of the air quality in several locations of the Bay Area, as well as the entire Bay Area and State of California during the days surrounding 09/09/2020. Following the data exploration and visualization, an analysis of the OpenAQ data is presented. The report ends with concluding remarks and a statement on the authors’ contributions.</p>
+</div>
+<div class="section" id="data-exploration">
+<h2>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<p>When requested, data from OpenAQ arrives in the JSON format, which allows one to easily parse it into a Pandas DataFrame for analysis. An example of the parameters that come with each JSON packet are shown below for the San Francisco Air Quality Sensing Location. The air quality parameters available to explore are CO (carbon monoxide), NO<sub>2</sub> (Nitrogen Dioxide), PM<sub>2.5</sub> (fine particulate matter that is 2.5 microns or less), and O<sub>3</sub> (Ozone).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="p">;</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;data/paramdf.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>San Francisco AQ Parameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>id</th>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>country</th>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>city</th>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>cities</th>
+      <td>[San Francisco-Oakland-Fremont]</td>
+    </tr>
+    <tr>
+      <th>location</th>
+      <td>San Francisco</td>
+    </tr>
+    <tr>
+      <th>locations</th>
+      <td>[San Francisco]</td>
+    </tr>
+    <tr>
+      <th>sourceName</th>
+      <td>AirNow</td>
+    </tr>
+    <tr>
+      <th>sourceNames</th>
+      <td>[AirNow]</td>
+    </tr>
+    <tr>
+      <th>sourceType</th>
+      <td>government</td>
+    </tr>
+    <tr>
+      <th>sourceTypes</th>
+      <td>[government]</td>
+    </tr>
+    <tr>
+      <th>firstUpdated</th>
+      <td>2016-03-06 19:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>lastUpdated</th>
+      <td>2022-05-11 01:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>parameters</th>
+      <td>[co, no2, pm25, o3]</td>
+    </tr>
+    <tr>
+      <th>countsByMeasurement</th>
+      <td>[{'parameter': 'co', 'count': 91951}, {'parame...</td>
+    </tr>
+    <tr>
+      <th>count</th>
+      <td>371070</td>
+    </tr>
+    <tr>
+      <th>coordinates.latitude</th>
+      <td>37.7658</td>
+    </tr>
+    <tr>
+      <th>coordinates.longitude</th>
+      <td>-122.3978</td>
+    </tr>
+    <tr>
+      <th>geometry</th>
+      <td>POINT (-122.3978 37.7658)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As stated previously, we intend to focus our analysis on the San Francisco Bay Area. By filtering the OpenAQ dataset with the Bay Area as our region, we focus our data exploration at the locations in the image below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">;</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;figures/BAgeog.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_5_0.png" src="_images/Main_5_0.png" />
+</div>
+</div>
+<p>Taking a look at data from the past week (5/3/2022 to 5/10/2022) in the Bay Area, we see the following statistical information about the parameters. Clearly, the fine particulate matter (PM<sub>2.5</sub>) exhibits the most variance. In the boxplots below it is even easier to see this variance.</p>
+<p>PM<sub>2.5</sub> can be particularly dangrous as it can cause short-term health effects such as eye, nose, and lung irritation, coughing, sneezing, and shortness of breath, and long-term exposure (months to years) has been <a class="reference external" href="https://nepis.epa.gov/Exe/ZyPDF.cgi/P100RQ5N.PDF?Dockey=P100RQ5N.PDF">linked to premature death</a>. Because of its importance in evaluating air quality indicators, PM<sub>2.5</sub> will be the focus of our exploration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;data/weekstatsdf.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min</th>
+      <th>25th percentile</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>75th percentile</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>parameter</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bc</th>
+      <td>0.020</td>
+      <td>0.090</td>
+      <td>0.200</td>
+      <td>0.244613</td>
+      <td>0.315</td>
+      <td>1.170</td>
+    </tr>
+    <tr>
+      <th>co</th>
+      <td>0.120</td>
+      <td>0.220</td>
+      <td>0.280</td>
+      <td>0.312877</td>
+      <td>0.370</td>
+      <td>0.790</td>
+    </tr>
+    <tr>
+      <th>no2</th>
+      <td>0.000</td>
+      <td>0.002</td>
+      <td>0.004</td>
+      <td>0.005016</td>
+      <td>0.006</td>
+      <td>0.036</td>
+    </tr>
+    <tr>
+      <th>o3</th>
+      <td>0.003</td>
+      <td>0.025</td>
+      <td>0.034</td>
+      <td>0.032220</td>
+      <td>0.039</td>
+      <td>0.063</td>
+    </tr>
+    <tr>
+      <th>pm25</th>
+      <td>-3.000</td>
+      <td>4.000</td>
+      <td>6.000</td>
+      <td>6.339687</td>
+      <td>8.000</td>
+      <td>43.000</td>
+    </tr>
+    <tr>
+      <th>so2</th>
+      <td>-0.001</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000491</td>
+      <td>0.001</td>
+      <td>0.012</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/PM25TSthisweek.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_8_0.png" src="_images/Main_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/PM25Boxthisweek.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_9_0.png" src="_images/Main_9_0.png" />
+</div>
+</div>
+<p>The data for this past week is especially interesting when we consider it in the context of the days surrounding the “dark day” (September 9, 2020). The time series graph above with the peak PM<sub>2.5</sub> of 43 <span class="math notranslate nohighlight">\(\mu gm^{-3}\)</span> seems high, but considering the peak during the wildfire period was greater than 200 <span class="math notranslate nohighlight">\(\mu gm^{-3}\)</span> (as pictured below) it puts it in a new perspective.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/PM25TScompare.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_11_0.png" src="_images/Main_11_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/PM25Boxcompare.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_12_0.png" src="_images/Main_12_0.png" />
+</div>
+</div>
+<p>It is also interesting to see that the peak PM<sub>2.5</sub> during the wildfire period does <em><strong>not</strong></em> occur on the so-called “dark day” itself. This fact is made even more clear by focusing on one specific data sensor, that which is located in San Francisco and is operated by the Bay Area Air Quality Management District (BAAQMD).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/SFTS.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_14_0.png" src="_images/Main_14_0.png" />
+</div>
+</div>
+<p>Not only did the peak PM<sub>2.5</sub> occur a day or more after the “dark day” but that after falling from its peak, the particulate matter increased once again to nearly the same amount. This is interesting to learn for several reasons. First and foremost, there is a clear delay between when people on the ground “saw” their poor air quality and when the sensor “saw” the poor air quality. This is likely because on the “dark day” the particulates were likely high in the sky at a height much greater than that of the air quality sensors, which tend to be located either a few feet above the surface, or on the top of a building as pictured below. This is understandable, as the air quality sensors aim to provide air quality index (AQI) information about the air people will actually be breathing. Depending on the individual, however, one might heed air quality issues only when they can actually them. For example, a person on the “dark day” was likely to wear a facemask because the amount of air pollution they can see in the sky and would thus imagine they could be breathing it in on the ground (as well as because of the COVID-19 pandemic). On the otherhand, a couple of days after the dark day, when the sky appears more visible, but the ground-level air quality is actually lower, could lead to individuals being outside without a face mask because they cannot “see” the poor air quality themselves. Though this challenge is beyond the scope of this analysis, it is an interesting predicament.</p>
+ <center><img src="https://ww2.arb.ca.gov/sites/default/files/styles/list/public/images/AirMonitoring-20.jpg?h=180281fb&itok=ypZzf_Vf" width="350" height="350" /></center>
+<p>The second interest aspect of this finding is the fact that, several days after the “dark day” the air quality seemingly returns back to normal. This begs the question – <strong>What happened to the poor quality air? Did it settle on the ground in the Bay Area, or did wind/air currents carry it to a different part of the Bay Area (or even a different part of California)?</strong> This will the be the focus of the visualization section of this write-up.</p>
+<p>The full code for the Data Exploration section can be found in the <a class="reference internal" href="ExplorationAndVisualization.html"><span class="doc std std-doc">ExplorationAndVisualization.ipynb Jupyter Notebook</span></a>.</p>
+</div>
+<div class="section" id="visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020">
+<h2>Visualization of SF Bay Area Air Quality During Wildfire Period (09/07/2020 to 09/17/2020)<a class="headerlink" href="#visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020" title="Permalink to this headline">¶</a></h2>
+<p>To visualize the air quality of the San Francisco Bay Area during the wildfire period, we can start by looking at the PM<sub>2.5</sub> at each sensor location. We can see in the gif below that the particulates seem to move into San Francisco on the 9th, reach their peak at the 10th, move towards the East Bay with a peak there by the 12th, before moving back towards San Francisco by the 13th for a second peak, before dissipating in the entire Bay Area by the 16th.</p>
+<center><img src="figures/simpletimelapsegif.gif" width="750" height="750" /></center><p>We can refine this visualization by increasing the time steps from daily to hourly point measurements, and interpolating between points to form smooth contours. For the purposes of this visualization, we assume a linear interpolation between spatial and temporal points (when data at specific sensors was not available. From this new visualization, we can see the effects air currents have on the particulate measurements throughout the day. Once again, we see the particulates move in from the east, however in this new visualization, we can see that the particulates move from the San Francisco Peninsula to the South Bay towards the end of the day of the 11th. The particulates then move back north to San Francisco and the Berkeley/Oakland part of the East Bay before continuing east where it dissipates.</p>
+<img src="figures/timelapsegif.gif" width="750" height="750" /><p>In the above visualization, we see the particulates move towards the South and East parts of the Bay Area after the initial peak near San Francisco. To see how the rest of the State of California was potentiall impacted by the particulates, we expand our visualization to include the rest of the state, as well as sensors in nearby states (e.g., Las Vegas). Several attempts were made to pull data for the entire United States to see the potential nation-wide impacts of the wildfire-related low air quality, however the API became throttled from too many consecutive requests.</p>
+<center><img src="figures/CAtimelapsegif.gif" width="750" height="750" /></center><p>Unfortunately, due to the lack of granularity in the data, the missing areas created from missing datapoints for multiple days, and the requisite linear interpolation between points, it is difficult to perceive specific patterns in the changes in air quality for the State during the period of analysis. One key reason for this is the tragic and unfortunate fact that <a class="reference external" href="https://www.fire.ca.gov/incidents/2020/">numerous wildfires were occuring simultaneously</a> in multiple parts of the State during the period of analysis. This is an interesting unintended feature of this visualization – that you can visualize where wildfires were located around the State and their multiple areas of influence.</p>
+<p>The full code for creating the animations for the Data Visualization section can be found in the <a class="reference internal" href="ExplorationAndVisualization.html"><span class="doc std std-doc">ExplorationAndVisualization.ipynb Jupyter Notebook</span></a>.</p>
+</div>
+<div class="section" id="analysis-i-prediction-of-future-dark-days">
+<h2>Analysis I: Prediction of Future “Dark Days”<a class="headerlink" href="#analysis-i-prediction-of-future-dark-days" title="Permalink to this headline">¶</a></h2>
+<p>Fill in w/ Ram’s material</p>
+</div>
+<div class="section" id="analysis-ii-report-from-gyuhyeon">
+<h2>Analysis II: Report from Gyuhyeon<a class="headerlink" href="#analysis-ii-report-from-gyuhyeon" title="Permalink to this headline">¶</a></h2>
+<p>Text</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>assumptions
+statistical hypotheses/justifications
+a few simple, scientifically interesting questions
+author contribution statement</p>
+</div>
+<div class="section" id="author-contributions">
+<h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
+<p><strong>Wesley Darling</strong>: Created <code class="docutils literal notranslate"><span class="pre">ExplorationAndVisualization.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">viz_utils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_viz_utils.py</span></code>); created the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files; provided written material and figures for Motivation, Introduction, Data Exploration, and Data Visualization sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "aqproject"
+        },
+        kernelOptions: {
+            kernelName: "aqproject",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'aqproject'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="MainAnalysis.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Version 1</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Wesley Darling, Gyuhyeon Seo, Jae Hee Koh, Ram Mukund Kripa<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

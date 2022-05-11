@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysing the dark day over San Francisco (Sep 9 2020) &#8212; AQ Project Jupyter Book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Exploring and Visualizing OpenAQ Data" href="ExplorationAndVisualization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/orangeskies.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">AQ Project Jupyter Book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Main.html">
+   Exploring the Air Quality of the San Francisco Bay Area using OpenAQ
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Analysis Notebooks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="MainAnalysis.html">
+   Version 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ExplorationAndVisualization.html">
+   Exploring and Visualizing OpenAQ Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analysing the dark day over San Francisco (Sep 9 2020)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/modelling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/modelling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-in-the-data">
+   Loading in the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zooming-in-on-the-period-around-september-aso-august-september-october">
+   Zooming in on the period around September (ASO- August September October)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#are-pm2-5-and-co-related">
+   Are PM2.5 and CO related?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-the-dark-day">
+   Back to the Dark Day
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#could-the-event-have-been-predicted-or-was-it-an-anomaly">
+   Could the event have been predicted or was it an anomaly?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analysing the dark day over San Francisco (Sep 9 2020)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-in-the-data">
+   Loading in the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zooming-in-on-the-period-around-september-aso-august-september-october">
+   Zooming in on the period around September (ASO- August September October)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#are-pm2-5-and-co-related">
+   Are PM2.5 and CO related?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-the-dark-day">
+   Back to the Dark Day
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#could-the-event-have-been-predicted-or-was-it-an-anomaly">
+   Could the event have been predicted or was it an anomaly?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="analysing-the-dark-day-over-san-francisco-sep-9-2020">
+<h1>Analysing the dark day over San Francisco (Sep 9 2020)<a class="headerlink" href="#analysing-the-dark-day-over-san-francisco-sep-9-2020" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openaq</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">aqtools</span> <span class="kn">import</span> <span class="n">aqutils</span> <span class="k">as</span> <span class="n">u</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">openaq</span><span class="o">.</span><span class="n">OpenAQ</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On Sep 9, 2020, San Francisco experienced a day where the sky turned <a class="reference external" href="https://www.newyorker.com/culture/video-dept/the-day-the-san-francisco-sky-turned-orange">orange</a></p>
+<div class="section" id="loading-in-the-data">
+<h2>Loading in the Data<a class="headerlink" href="#loading-in-the-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="p">,</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span> <span class="o">=</span> <span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">,</span><span class="s1">&#39;pm25&#39;</span><span class="p">],</span> <span class="n">date_from</span> <span class="o">=</span> <span class="s1">&#39;2020-04-01&#39;</span><span class="p">,</span> <span class="n">date_to</span> <span class="o">=</span> <span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="s1">&#39;asc&#39;</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+    <span class="n">local_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">cleaning_date</span><span class="p">(</span><span class="n">local_date</span><span class="p">)</span>
+    <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>parameter</th>
+      <th>co</th>
+      <th>pm25</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-03-31 17:00:00</th>
+      <td>0.26</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2020-03-31 18:00:00</th>
+      <td>0.25</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2020-03-31 19:00:00</th>
+      <td>0.25</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2020-03-31 20:00:00</th>
+      <td>0.24</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2020-03-31 21:00:00</th>
+      <td>0.24</td>
+      <td>-2.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-11-25 13:00:00</th>
+      <td>0.26</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-25 15:00:00</th>
+      <td>0.23</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-25 16:00:00</th>
+      <td>0.25</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-25 17:00:00</th>
+      <td>0.26</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-25 18:00:00</th>
+      <td>0.28</td>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>4093 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>We load in data from 2020, before and after the incident, so that the spike is clear.
+In descriptions of the event, it has been described to be caused by the combination of fog and smoke caused by wildfires. Since fog is not very quantifiable in these analyses, we focus on variables commonly associated with wildfires, like PM2.5 suspended particulate matter, as well as carbon monoxide production.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;PM2.5 Pollutants&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Carbon Monoxide&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_6_0.png" src="_images/modelling_6_0.png" />
+</div>
+</div>
+<p>We see above that there is a clear spike in PM2.5 pollutants concentration around September, and there is also a less prominent spike in the Carbon Monoxide concentration plot. This is to be expected given that in 2020 there were many wildfires which would have all caused spikes.</p>
+</div>
+<div class="section" id="zooming-in-on-the-period-around-september-aso-august-september-october">
+<h2>Zooming in on the period around September (ASO- August September October)<a class="headerlink" href="#zooming-in-on-the-period-around-september-aso-august-september-october" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="c1">#df_around_september = df.query(&#39;date.dt.month == 9 or date.dt.month == 8 or date.dt.month == 10&#39;)</span>
+<span class="n">df_around_september</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;date &gt; &quot;2020-08-20&quot; and date &lt; &quot;2020-10-10&quot;&#39;</span><span class="p">)</span>
+<span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO PM2.5 Pollutants&#39;</span><span class="p">)</span>
+<span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO Carbon Monoxide&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/pm25_co_aso.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_9_0.png" src="_images/modelling_9_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum CO concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum CO concentration found at  2020-08-28 08:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum PM2.5 concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum PM2.5 concentration found at  2020-09-10 15:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>In terms of the PM2.5 graph, while there are other spikes, it seems like there is a clear spike around the orange skies event in question. However, for the CO graph, there are stronger spikes elsewhere. An interesting thing to note is that the CO concentration around the time of the event seems to be consistently high (barring missing values). This would suggest the use of a moving average (maybe a few hours) rather than the values themselves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df_around_september_roll</span> <span class="o">=</span> <span class="n">df_around_september</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO PM2.5 Pollutants&#39;</span><span class="p">)</span>
+<span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO Carbon Monoxide&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/pm25_co_rolling_aso.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_13_0.png" src="_images/modelling_13_0.png" />
+</div>
+</div>
+<p>This would seem to confirm the finding that about 5 days of accumulated PM2.5 and CO concentration would maybe cause the orange skies. Let’s confirm by finding the max days and verifying that they are indeed September 9 or close to it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum CO concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum CO concentration found at  2020-09-11 12:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum PM2.5 concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum PM2.5 concentration found at  2020-09-10 19:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the maximum concentration of both PM2.5 and CO occurs around Sep 10-11 which is around the time orange skies were prevalent in San Francisco</p>
+</div>
+<div class="section" id="are-pm2-5-and-co-related">
+<h2>Are PM2.5 and CO related?<a class="headerlink" href="#are-pm2-5-and-co-related" title="Permalink to this headline">¶</a></h2>
+<p>We look at some basic analysis to determine whether there is a correlation between PM2.5 and CO concentrations.</p>
+<p>There are many NA missing values in the CO column while PM2.5 column seems full. Can we use PM2.5 to infer the CO value?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is percent missing values in PM2.5 column&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is percent missing values in CO column&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.610798924993892 is percent missing values in PM2.5 column
+4.764231614952358 is percent missing values in CO column
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">df_no_na</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df_no_na</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">],</span> <span class="n">df_no_na</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">],</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;CO concentration&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;PM2.5 Concentration&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot; Correlation Between PM2.5 and CO &quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/pm25_co_corr.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_23_0.png" src="_images/modelling_23_0.png" />
+</div>
+</div>
+<p>The line seems to fit the data reasonably well. We may use this to infer the missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;co_modelled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;co_inferred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;co_modelled&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;CO Measured&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;co_modelled&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;CO Modelled&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;co_inferred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;CO Inferred&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/co_meas_pred_inf.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;CO Inferred&#39;}, xlabel=&#39;date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/modelling_26_1.png" src="_images/modelling_26_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="back-to-the-dark-day">
+<h2>Back to the Dark Day<a class="headerlink" href="#back-to-the-dark-day" title="Permalink to this headline">¶</a></h2>
+<p>Does the analysis from before still yield the dark day, with the new inferred values, and how does it compare to linearly interpolated values?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_around_september</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;date &gt; &quot;2020-08-20&quot; and date &lt; &quot;2020-10-10&quot;&#39;</span><span class="p">)</span>
+<span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;co_interpolated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_around_september</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2573/2895539279.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_around_september[&#39;co_interpolated&#39;] = df_around_september[&#39;co&#39;].interpolate()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_around_september_roll</span> <span class="o">=</span> <span class="n">df_around_september</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO PM2.5 Pollutants&#39;</span><span class="p">)</span>
+<span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co_inferred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO Carbon Monoxide Inferred&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co_interpolated&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO Carbon Monoxide Interpolated&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/pm25_co_compare_interps.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_31_0.png" src="_images/modelling_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum CO concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum CO Inferred concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co_inferred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum CO Interpolated concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;co_interpolated&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum CO concentration found at  2020-09-11 12:00:00
+Maximum CO Inferred concentration found at  2020-09-11 12:00:00
+Maximum CO Interpolated concentration found at  2020-09-11 12:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum PM2.5 concentration found at &#39;</span><span class="p">,</span> <span class="n">df_around_september_roll</span><span class="p">[</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum PM2.5 concentration found at  2020-09-10 19:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>No significant difference in the results was found. We can conclude that inferring CO from PM2.5 in this case was not worse than linear interpolation. Also, we have confirmed the results from before, with the spike in PM2.5 and CO coinciding with the Orange skies over San Francisco.</p>
+</div>
+<div class="section" id="could-the-event-have-been-predicted-or-was-it-an-anomaly">
+<h2>Could the event have been predicted or was it an anomaly?<a class="headerlink" href="#could-the-event-have-been-predicted-or-was-it-an-anomaly" title="Permalink to this headline">¶</a></h2>
+<p>To analyse whether the event could have been predicted (in terms of CO and PM2.5 concentrations) we must analyse the yearly patterns in the area in the ASO period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">yeary</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2022</span><span class="p">):</span>
+    <span class="n">date_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">yeary</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-08-20&quot;</span>
+    <span class="n">date_t</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">yeary</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-10-10&quot;</span>
+    <span class="n">status</span><span class="p">,</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span> <span class="o">=</span> <span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;co&#39;</span><span class="p">,</span><span class="s1">&#39;pm25&#39;</span><span class="p">],</span> <span class="n">date_from</span> <span class="o">=</span> <span class="n">date_f</span><span class="p">,</span> <span class="n">date_to</span> <span class="o">=</span> <span class="n">date_t</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="s1">&#39;asc&#39;</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+        <span class="n">local_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">cleaning_date</span><span class="p">(</span><span class="n">local_date</span><span class="p">)</span>
+        <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+    <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span><span class="mi">70</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">))</span> <span class="p">:</span>
+    <span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;pm25&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO PM2.5 Pollutants&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2016</span><span class="o">+</span><span class="n">i</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;co&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;ASO Carbon Monoxide&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2016</span><span class="o">+</span><span class="n">i</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/pm25_co_across_years.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/modelling_38_0.png" src="_images/modelling_38_0.png" />
+</div>
+</div>
+<p>While there are spikes in other years, it seems that a sustained period of high PM2.5 and CO concentration was seen only in 2020. This would seem to fit anecdotal infromation that the event does not happen every wildfire season.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "aqproject"
+        },
+        kernelOptions: {
+            kernelName: "aqproject",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'aqproject'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="ExplorationAndVisualization.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Exploring and Visualizing OpenAQ Data</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Wesley Darling, Gyuhyeon Seo, Jae Hee Koh, Ram Mukund Kripa<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

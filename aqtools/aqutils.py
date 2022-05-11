@@ -79,4 +79,3 @@ def differencing(arr):
         diff = v - arr[i-1]
         diff_lst.append(diff)
     return diff_lst
-

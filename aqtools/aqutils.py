@@ -5,6 +5,14 @@ AQI_BREAKPOINTS = './aqtools/aqi_breakpoints.csv'
 
 
 def get_aqi(pollutant, value):
+    """Get AQI corresponding pollutant and value
+    :param pollutant: type of pollutant
+    :param value: value of pollutant
+
+    :type endpoint: string
+    :type method: float
+    :returns: integer value of AQI
+    """
     pollutants = {'pm25': '88502',
                   'co': '42101',
                   'no2': '42602',
@@ -26,6 +34,13 @@ def get_aqi(pollutant, value):
 
 
 def cleaning_date(s):
+    """Cleaning dateformat
+    :param s: list type string sequence
+
+    :type endpoint: string
+    :type method: float
+    :returns: integer value of AQI
+    """
     return s[:-6].split('T')[0]+' ' + s[:-6].split('T')[1]
 
 

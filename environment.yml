@@ -5,10 +5,15 @@ dependencies:
   - numpy
   - pandas
   - seaborn
-  - pip
+  - geopandas
+  - Shapely
+  - geoplot
+  - imageio
+  - pytest
   - scipy
   - matplotlib
   - tensorflow=2.7
+  - pip
   - pip:
     - py-openaq
     - basemap

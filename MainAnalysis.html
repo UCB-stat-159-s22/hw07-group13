@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Version 1 &#8212; AQ Project Jupyter Book</title>
+    <title>Predicting Concentrations of PM2.5 &#8212; AQ Project Jupyter Book</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,8 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Exploring and Visualizing OpenAQ Data" href="ExplorationAndVisualization.html" />
-    <link rel="prev" title="Exploring the Air Quality of the San Francisco Bay Area using OpenAQ" href="Main.html" />
+    <link rel="prev" title="Analysing the dark day over San Francisco (Sep 9 2020)" href="modelling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,11 +101,6 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Version 1
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ExplorationAndVisualization.html">
    Exploring and Visualizing OpenAQ Data
@@ -115,6 +109,14 @@
  <li class="toctree-l1">
   <a class="reference internal" href="modelling.html">
    Analysing the dark day over San Francisco (Sep 9 2020)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Predicting Concentrations of PM
+   <sub>
+    2.5
+   </sub>
   </a>
  </li>
 </ul>
@@ -205,17 +207,17 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#version-1">
    Version 1
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#version-2">
    Version 2
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#regression-with-wind-speed-and-relative-humidity-data">
      Regression with wind speed and relative humidity data
     </a>
@@ -232,7 +234,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Version 1</h1>
+                <h1>Predicting Concentrations of PM<sub>2.5</sub></h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -242,17 +244,17 @@
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#version-1">
    Version 1
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#version-2">
    Version 2
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#regression-with-wind-speed-and-relative-humidity-data">
      Regression with wind speed and relative humidity data
     </a>
@@ -268,7 +270,9 @@
             
               <div>
                 
-  <div class="cell docutils container">
+  <div class="tex2jax_ignore mathjax_ignore section" id="predicting-concentrations-of-pm-sub-2-5-sub">
+<h1>Predicting Concentrations of PM<sub>2.5</sub><a class="headerlink" href="#predicting-concentrations-of-pm-sub-2-5-sub" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openaq</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -290,7 +294,7 @@
 </div>
 </div>
 <div class="section" id="version-1">
-<h1>Version 1<a class="headerlink" href="#version-1" title="Permalink to this headline">¶</a></h1>
+<h2>Version 1<a class="headerlink" href="#version-1" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameter setting</span>
@@ -690,7 +694,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_8_0.png" src="_images/MainAnalysis_8_0.png" />
+<img alt="_images/MainAnalysis_9_0.png" src="_images/MainAnalysis_9_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -735,7 +739,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   df[&#39;o3&#39;] = o3_diff
 </pre></div>
 </div>
-<img alt="_images/MainAnalysis_9_1.png" src="_images/MainAnalysis_9_1.png" />
+<img alt="_images/MainAnalysis_10_1.png" src="_images/MainAnalysis_10_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1132,14 +1136,14 @@ Epoch 100/100
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_15_0.png" src="_images/MainAnalysis_15_0.png" />
+<img alt="_images/MainAnalysis_16_0.png" src="_images/MainAnalysis_16_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="version-2">
-<h1>Version 2<a class="headerlink" href="#version-2" title="Permalink to this headline">¶</a></h1>
+<h2>Version 2<a class="headerlink" href="#version-2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="regression-with-wind-speed-and-relative-humidity-data">
-<h2>Regression with wind speed and relative humidity data<a class="headerlink" href="#regression-with-wind-speed-and-relative-humidity-data" title="Permalink to this headline">¶</a></h2>
+<h3>Regression with wind speed and relative humidity data<a class="headerlink" href="#regression-with-wind-speed-and-relative-humidity-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">date_from</span> <span class="o">=</span> <span class="s1">&#39;2022-05-02T00:00:00Z&#39;</span>
@@ -1649,7 +1653,7 @@ Epoch 100/100
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_24_0.png" src="_images/MainAnalysis_24_0.png" />
+<img alt="_images/MainAnalysis_25_0.png" src="_images/MainAnalysis_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1710,7 +1714,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   df[&#39;relative humidity&#39;] = rh_diff
 </pre></div>
 </div>
-<img alt="_images/MainAnalysis_25_1.png" src="_images/MainAnalysis_25_1.png" />
+<img alt="_images/MainAnalysis_26_1.png" src="_images/MainAnalysis_26_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1950,7 +1954,7 @@ Epoch 16/50
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;actual&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediction on cencentrations of pm 2.5 using GRU ver.2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediction on concentrations of pm 2.5 using GRU ver.2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time step (hour)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;concentrations of pm 2.5 (ug/m^3)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -1961,7 +1965,8 @@ Epoch 16/50
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_31_0.png" src="_images/MainAnalysis_31_0.png" />
+<img alt="_images/MainAnalysis_32_0.png" src="_images/MainAnalysis_32_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -1992,19 +1997,12 @@ Epoch 16/50
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="Main.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="modelling.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Exploring the Air Quality of the San Francisco Bay Area using OpenAQ</p>
+            <p class="prev-next-title">Analysing the dark day over San Francisco (Sep 9 2020)</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="ExplorationAndVisualization.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exploring and Visualizing OpenAQ Data</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

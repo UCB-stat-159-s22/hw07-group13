@@ -730,7 +730,7 @@
 </div>
 <div class="section" id="analysis-ii-predicting-concentrations-of-pm-sub-2-5-sub">
 <h2>Analysis II: Predicting Concentrations of PM<sub>2.5</sub><a class="headerlink" href="#analysis-ii-predicting-concentrations-of-pm-sub-2-5-sub" title="Permalink to this headline">¶</a></h2>
-<p>Neural networks were used to attempt to predict PM<sub>2.5</sub> concentrations based on the concentrations of other pollutants, as well as atmospheric factors like wind speed and relative humidity. Air quality data was queried from the OpenAQ API for the Oakland Air Quality Station for the period of 09/01/2021 to 03/01/2022. Atmospheric data was queried from the NOAA API for the same location and date range. Approximately 10% of the dataset was reserved for model testing, while the other 90% was used for model training and validation.</p>
+<p>In the Data Exploration and Visualization sections above, it is clear that there are multiple sensor locations that do not measure PM<sub>2.5</sub>. Due to its importance as a metric for air quality,  the goal of this second analysis is to explore how PM<sub>2.5</sub> concentrations can be predicted based on the concentrations of other pollutants, as well as atmospheric factors like wind speed and relative humidity. Neural Networks were selected as the machine learning method to develop the predictive algorithm. Air quality data was queried from the OpenAQ API for the Oakland Air Quality Station for the period of 09/01/2021 to 03/01/2022. Atmospheric data was queried from the NOAA API for the same location and date range. Approximately 10% of the dataset was reserved for model testing, while the other 90% was used for model training and validation.</p>
 <p>A first predictive model using Gated Recurrent Unit Neural Network was developing using only air quality data (i.e., predicting the PM<sub>2.5</sub> concentration based on the concentrations of CO, NO<sub>2</sub>, and O<sub>3</sub>. First the air quality data were scaled and made stationary using the differencing technique, as shown in the figures below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -943,7 +943,19 @@
 </table>
 </div></div></div>
 </div>
-<p>A neural network with the Gated Recurrent Unit mechanism was once again used to predict PM<sub>2.5</sub> concentrations from other air quality parameters and from atmospheric conditions.</p>
+<p>A neural network with the Gated Recurrent Unit mechanism was once again used to predict PM<sub>2.5</sub> concentrations from other air quality parameters and from atmospheric conditions.  The predicted results of the second model on the testing data are presented below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/prediction_results_ver2.png&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Main_46_0.png" src="_images/Main_46_0.png" />
+</div>
+</div>
+<p>As can be seen in the figure above, the second model fails to capture the periodic/sinusoidal nature of PM<sub>2.5</sub> concentrations throughout the day. This can most likely be attributed to the lack of available atmospheric data. Because the NOAA API was used, only current data could be used for training/testing. Additionally, this limited, 7-day dataset did not include all hourly measurements. Because the missing values were filled with the median, this likely led to the perfect correlation between wind speed and relative humidity, reducing the explanatory power of either feature.</p>
+<p>Future work on predicting PM<sub>2.5</sub> concentrations will be necessary to build upon these preliminary analyses. A future implementation could include additional other atmospheric factors, and could be based on historical data requested by email by NOAA, to ensure that a large enough training set is available for the model. Additionally, given the periodic nature of the PM<sub>2.5</sub> concentration, statistical analysis tools from the field of time series analysis could be applied, specifically multivariate autoregressive models, multivariate linear Gaussian particle filters, or Monte Carlo Markov Chain methods. Given the importance of measuring and predicting the potentially dangerous PM<sub>2.5</sub> levels, the models found in this analysis should serve as but a stepping off point for more in-depth air quality research.</p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
@@ -954,7 +966,7 @@ author contribution statement</p>
 </div>
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
-<p><strong>Wesley Darling</strong>: Created <code class="docutils literal notranslate"><span class="pre">ExplorationAndVisualization.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">viz_utils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_viz_utils.py</span></code>); created the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files; provided written material and figures for Motivation, Introduction, Data Exploration, and Data Visualization sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Wesley Darling</strong>: Created <code class="docutils literal notranslate"><span class="pre">ExplorationAndVisualization.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">viz_utils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_viz_utils.py</span></code>); created the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files; provided written material and figures for Motivation, Introduction, Data Exploration, Data Visualization, and Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

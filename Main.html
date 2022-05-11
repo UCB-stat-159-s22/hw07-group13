@@ -623,8 +623,32 @@
 <div class="section" id="visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020">
 <h2>Visualization of SF Bay Area Air Quality During Wildfire Period (09/07/2020 to 09/17/2020)<a class="headerlink" href="#visualization-of-sf-bay-area-air-quality-during-wildfire-period-09-07-2020-to-09-17-2020" title="Permalink to this headline">¶</a></h2>
 <p>To visualize the air quality of the San Francisco Bay Area during the wildfire period, we can start by looking at the PM<sub>2.5</sub> at each sensor location. We can see in the gif below that the particulates seem to move into San Francisco on the 9th, reach their peak at the 10th, move towards the East Bay with a peak there by the 12th, before moving back towards San Francisco by the 13th for a second peak, before dissipating in the entire Bay Area by the 16th.</p>
-<center><img src="figures/simpletimelapsegif.gif" width="750" height="750" /></center><p>We can refine this visualization by increasing the time steps from daily to hourly point measurements, and interpolating between points to form smooth contours. For the purposes of this visualization, we assume a linear interpolation between spatial and temporal points (when data at specific sensors was not available. From this new visualization, we can see the effects air currents have on the particulate measurements throughout the day. Once again, we see the particulates move in from the east, however in this new visualization, we can see that the particulates move from the San Francisco Peninsula to the South Bay towards the end of the day of the 11th. The particulates then move back north to San Francisco and the Berkeley/Oakland part of the East Bay before continuing east where it dissipates.</p>
-<img src="figures/timelapsegif.gif" width="750" height="750" /><p>In the above visualization, we see the particulates move towards the South and East parts of the Bay Area after the initial peak near San Francisco. To see how the rest of the State of California was potentiall impacted by the particulates, we expand our visualization to include the rest of the state, as well as sensors in nearby states (e.g., Las Vegas). Several attempts were made to pull data for the entire United States to see the potential nation-wide impacts of the wildfire-related low air quality, however the API became throttled from too many consecutive requests.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;figures/simpletimelapsegif.gif&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can refine this visualization by increasing the time steps from daily to hourly point measurements, and interpolating between points to form smooth contours. For the purposes of this visualization, we assume a linear interpolation between spatial and temporal points (when data at specific sensors was not available. From this new visualization, we can see the effects air currents have on the particulate measurements throughout the day. Once again, we see the particulates move in from the east, however in this new visualization, we can see that the particulates move from the San Francisco Peninsula to the South Bay towards the end of the day of the 11th. The particulates then move back north to San Francisco and the Berkeley/Oakland part of the East Bay before continuing east where it dissipates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;figures/timelapsegif.gif&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above visualization, we see the particulates move towards the South and East parts of the Bay Area after the initial peak near San Francisco. To see how the rest of the State of California was potentiall impacted by the particulates, we expand our visualization to include the rest of the state, as well as sensors in nearby states (e.g., Las Vegas). Several attempts were made to pull data for the entire United States to see the potential nation-wide impacts of the wildfire-related low air quality, however the API became throttled from too many consecutive requests.</p>
 <center><img src="figures/CAtimelapsegif.gif" width="750" height="750" /></center><p>Unfortunately, due to the lack of granularity in the data, the missing areas created from missing datapoints for multiple days, and the requisite linear interpolation between points, it is difficult to perceive specific patterns in the changes in air quality for the State during the period of analysis. One key reason for this is the tragic and unfortunate fact that <a class="reference external" href="https://www.fire.ca.gov/incidents/2020/">numerous wildfires were occuring simultaneously</a> in multiple parts of the State during the period of analysis. This is an interesting unintended feature of this visualization – that you can visualize where wildfires were located around the State and their multiple areas of influence.</p>
 <p>The full code for creating the animations for the Data Visualization section can be found in the <a class="reference internal" href="ExplorationAndVisualization.html"><span class="doc std std-doc">ExplorationAndVisualization.ipynb Jupyter Notebook</span></a>.</p>
 </div>

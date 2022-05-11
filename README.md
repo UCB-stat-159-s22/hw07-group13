@@ -5,7 +5,7 @@ This repo houses the materials for a reproducible project report exploring air q
 
 __Binder Link__: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s22/hw07-group13/HEAD?labpath=Main.ipynb)
 
-__GitHub Pages Link__:
+__GitHub Pages Link__: https://ucb-stat-159-s22.github.io/hw07-group13/
 ***
 ## Installation ##
 

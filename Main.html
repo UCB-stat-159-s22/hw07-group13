@@ -649,7 +649,19 @@
 </div>
 </div>
 <p>In the above visualization, we see the particulates move towards the South and East parts of the Bay Area after the initial peak near San Francisco. To see how the rest of the State of California was potentiall impacted by the particulates, we expand our visualization to include the rest of the state, as well as sensors in nearby states (e.g., Las Vegas). Several attempts were made to pull data for the entire United States to see the potential nation-wide impacts of the wildfire-related low air quality, however the API became throttled from too many consecutive requests.</p>
-<center><img src="figures/CAtimelapsegif.gif" width="750" height="750" /></center><p>Unfortunately, due to the lack of granularity in the data, the missing areas created from missing datapoints for multiple days, and the requisite linear interpolation between points, it is difficult to perceive specific patterns in the changes in air quality for the State during the period of analysis. One key reason for this is the tragic and unfortunate fact that <a class="reference external" href="https://www.fire.ca.gov/incidents/2020/">numerous wildfires were occuring simultaneously</a> in multiple parts of the State during the period of analysis. This is an interesting unintended feature of this visualization – that you can visualize where wildfires were located around the State and their multiple areas of influence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;figures/CAtimelapsegif.gif&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unfortunately, due to the lack of granularity in the data, the missing areas created from missing datapoints for multiple days, and the requisite linear interpolation between points, it is difficult to perceive specific patterns in the changes in air quality for the State during the period of analysis. One key reason for this is the tragic and unfortunate fact that <a class="reference external" href="https://www.fire.ca.gov/incidents/2020/">numerous wildfires were occuring simultaneously</a> in multiple parts of the State during the period of analysis. This is an interesting unintended feature of this visualization – that you can visualize where wildfires were located around the State and their multiple areas of influence.</p>
 <p>The full code for creating the animations for the Data Visualization section can be found in the <a class="reference internal" href="ExplorationAndVisualization.html"><span class="doc std std-doc">ExplorationAndVisualization.ipynb Jupyter Notebook</span></a>.</p>
 </div>
 <div class="section" id="analysis-i-prediction-of-future-dark-days">

@@ -29,7 +29,7 @@ def pst_to_utc(date_str):
     :returns: string format utc datetime
     """
     d = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z').replace(minute=0)
-    return d.astimezone(pytz.timezone('utc')).strftime('%Y-%m-%d %H:%M:%S')
+    return d.astimezone(pytz.timezone('UTC')).strftime('%Y-%m-%d %H:%M:%S')
 
 
 def get_aqi(pollutant, value):
@@ -98,18 +98,6 @@ def date_pollutant_value(lst_of_dict, pollutant):
     df = df.iloc[::-1]
     df = df[df[pollutant] >= 0]
     return df
-
-
-def cleaning_date(s):
-    """Cleaning dateformat
-
-    :param s: list type string sequence of date e.g. '2021-08-01T00:00:00Z'
-
-    :type s: list, numpy array
-
-    :returns: list of clean format of date e.g. '2021-08-01 00:00:00'
-    """
-    return s[:-6].split('T')[0]+' ' + s[:-6].split('T')[1]
 
 
 def differencing(arr):

@@ -4,6 +4,7 @@ parts:
 - caption: Analysis Notebooks
   chapters:
   - file: ExplorationAndVisualization
+  - file: LA_Visualizations
   - file: modelling
   - file: MainAnalysis
 

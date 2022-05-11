@@ -13,7 +13,7 @@ dependencies:
   - scipy
   - matplotlib
   - scikit-learn
-  - tensorflow
+  - tensorflow=2.7
   - pip
   - pip:
     - py-openaq

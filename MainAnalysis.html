@@ -308,7 +308,7 @@
 <span class="n">date_to</span> <span class="o">=</span> <span class="s1">&#39;2022-03-01T00:00:00Z&#39;</span>
 <span class="n">city</span> <span class="o">=</span> <span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span>
 <span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;Oakland&#39;</span>
-<span class="n">date_retrieval_limit</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="n">data_query_limit</span> <span class="o">=</span> <span class="mi">4000</span>
 </pre></div>
 </div>
 </div>
@@ -321,7 +321,7 @@
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_co</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
 <span class="n">df_co</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -379,7 +379,7 @@
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_no2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
 
@@ -438,7 +438,7 @@
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_o3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
 <span class="n">df_o3</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
@@ -498,7 +498,7 @@
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_pm25</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
 <span class="n">df_pm25</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
@@ -1156,7 +1156,7 @@ Epoch 100/100
 <span class="n">date_to</span> <span class="o">=</span> <span class="s1">&#39;2022-05-10T00:00:00Z&#39;</span>
 <span class="n">city</span> <span class="o">=</span> <span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span>
 <span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;Oakland&#39;</span>
-<span class="n">date_retrieval_limit</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">data_query_limit</span> <span class="o">=</span> <span class="mi">150</span>
 
 <span class="n">date_from_utc</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">pst_to_utc</span><span class="p">(</span><span class="n">date_from</span><span class="p">)</span>
 <span class="n">date_to_utc</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">pst_to_utc</span><span class="p">(</span><span class="n">date_to</span><span class="p">)</span>
@@ -1174,7 +1174,7 @@ Epoch 100/100
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_co</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
 <span class="n">df_co</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1232,7 +1232,7 @@ Epoch 100/100
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_no2</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
 
@@ -1291,7 +1291,7 @@ Epoch 100/100
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_o3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
 <span class="n">df_o3</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>
@@ -1351,7 +1351,7 @@ Epoch 100/100
                                 <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">pollutant</span><span class="p">,</span>
                                 <span class="n">date_from</span><span class="o">=</span><span class="n">date_from</span><span class="p">,</span>
                                 <span class="n">date_to</span><span class="o">=</span><span class="n">date_to</span><span class="p">,</span>
-                                <span class="n">limit</span><span class="o">=</span><span class="n">date_retrieval_limit</span><span class="p">)</span>
+                                <span class="n">limit</span><span class="o">=</span><span class="n">data_query_limit</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
 <span class="n">df_pm25</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
 <span class="n">df_pm25</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">date_pollutant_value</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pollutant</span><span class="p">)</span>

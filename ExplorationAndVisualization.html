@@ -203,6 +203,29 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-the-openaq-api">
+   Exploring the OpenAQ API
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-current-day-to-wildfire-period">
+   Comparing current day to wildfire period
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-wildfire-period">
+   Visualizing the wildfire period
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -215,6 +238,29 @@
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-the-openaq-api">
+   Exploring the OpenAQ API
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-current-day-to-wildfire-period">
+   Comparing current day to wildfire period
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-wildfire-period">
+   Visualizing the wildfire period
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -223,6 +269,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="exploring-and-visualizing-openaq-data">
 <h1>Exploring and Visualizing OpenAQ Data<a class="headerlink" href="#exploring-and-visualizing-openaq-data" title="Permalink to this headline">¶</a></h1>
+<p>This notebook outlines the process that was taken for exploring the OpenAQ API and visualizing its data to learn more about air quality in the San Francisco Bay Area</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -261,6 +308,7 @@
 </div>
 </div>
 </div>
+<p>There are several GIFs that are created from visualizations of the Bay Area over time. Due to memory constraints with the DataHub, the kernel crashes when animations are made, hence why the option is set to false by default. It can be set to true if one wishes to rebuild the animations (perhaps if you’re running a high performance computer)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to True if you want to create the animated figures; it can crash the kernel from creating too many plots however</span>
@@ -269,6 +317,8 @@
 </div>
 </div>
 </div>
+<div class="section" id="exploring-the-openaq-api">
+<h2>Exploring the OpenAQ API<a class="headerlink" href="#exploring-the-openaq-api" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">openaq</span><span class="o">.</span><span class="n">OpenAQ</span><span class="p">()</span>
@@ -276,6 +326,7 @@
 </div>
 </div>
 </div>
+<p>When we enter the OpenAQ API, we can filter the thousands of locations by the area we are interested in, the San Francisco Bay Area.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sanfrancisco</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">locations</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -641,9 +692,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_5_0.png" src="_images/ExplorationAndVisualization_5_0.png" />
+<img alt="_images/ExplorationAndVisualization_9_0.png" src="_images/ExplorationAndVisualization_9_0.png" />
 </div>
 </div>
+<p>Now we can see what parameters are included with each packet of JSON data that comes from each location. Here is the set of parameters that comes from the San Francisco Air Quality Station.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_file</span> <span class="o">=</span> <span class="n">sanfrancisco</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;San Francisco AQ Parameters&#39;</span><span class="p">})</span>
@@ -751,6 +803,7 @@
 </table>
 </div></div></div>
 </div>
+<p>Now we’ll pull some summary statistics for the past week to see what the air quality has been like recently.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measure</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2022-05-03&#39;</span><span class="p">,</span>  <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2022-05-10&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -867,6 +920,10 @@
 </table>
 </div></div></div>
 </div>
+</div>
+<div class="section" id="comparing-current-day-to-wildfire-period">
+<h2>Comparing current day to wildfire period<a class="headerlink" href="#comparing-current-day-to-wildfire-period" title="Permalink to this headline">¶</a></h2>
+<p>Now we’ll compare the current air quality to that during the wildfire period that caused the dark day, from 09/07/2020 to 09/17/2020.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm25measure</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco-Oakland-Fremont&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;pm25&quot;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2022-05-03&#39;</span><span class="p">,</span>  <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2022-05-10&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -895,6 +952,7 @@
 </div>
 </div>
 </div>
+<p>Plotting them on a time series and them comparing them, we can see that even the worst air quality (PM<sub>2.5</sub> measurement specifically) days in the past week are not even a quarter of the worst air quality during the wildfire period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -918,7 +976,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_13_0.png" src="_images/ExplorationAndVisualization_13_0.png" />
+<img alt="_images/ExplorationAndVisualization_21_0.png" src="_images/ExplorationAndVisualization_21_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -950,9 +1008,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_14_0.png" src="_images/ExplorationAndVisualization_14_0.png" />
+<img alt="_images/ExplorationAndVisualization_22_0.png" src="_images/ExplorationAndVisualization_22_0.png" />
 </div>
 </div>
+<p>Comparing the summary statistics on a boxplot, we see similar results. The mean PM<sub>2.5</sub> for the wildfire period across the Bay Area is about 10 times larger than that for the past week. This is good, as it means the poor air quality of that wildfire period was anomalous.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
@@ -978,7 +1037,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_15_0.png" src="_images/ExplorationAndVisualization_15_0.png" />
+<img alt="_images/ExplorationAndVisualization_24_0.png" src="_images/ExplorationAndVisualization_24_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1020,9 +1079,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_16_0.png" src="_images/ExplorationAndVisualization_16_0.png" />
+<img alt="_images/ExplorationAndVisualization_25_0.png" src="_images/ExplorationAndVisualization_25_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="visualizing-the-wildfire-period">
+<h2>Visualizing the wildfire period<a class="headerlink" href="#visualizing-the-wildfire-period" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_day_sf_pm25</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;pm25&#39;</span><span class="p">,</span> <span class="n">date_from</span><span class="o">=</span><span class="s1">&#39;2020-09-07&#39;</span><span class="p">,</span> <span class="n">date_to</span><span class="o">=</span><span class="s1">&#39;2020-09-17&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
@@ -1151,9 +1213,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_18_0.png" src="_images/ExplorationAndVisualization_18_0.png" />
+<img alt="_images/ExplorationAndVisualization_28_0.png" src="_images/ExplorationAndVisualization_28_0.png" />
 </div>
 </div>
+<p>We see in the figure below that the PM<sub>2.5</sub> levels during the wildfire period were bimodal in San Francisco, meaning the particulates likely moved and then returned via wind patterns. Let’s see if we can visualize where the particulates traveled to.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">USlocs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">locations</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
@@ -1990,6 +2053,7 @@
 </div>
 </div>
 </div>
+<p>After filtering data to multiple Bay Area cities, now we can see how the PM<sub>2.5</sub> concentrations changed over time by animating the static images.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">single</span> <span class="o">=</span> <span class="n">vu</span><span class="o">.</span><span class="n">pointmap_single</span><span class="p">(</span><span class="n">loc_name</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">bay_data</span><span class="p">,</span> <span class="n">date1</span><span class="o">=</span><span class="n">col_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">basemap</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="n">center_lat</span><span class="o">=</span><span class="mf">37.8711428</span><span class="p">,</span> <span class="n">center_lon</span><span class="o">=-</span><span class="mf">122.3714777</span><span class="p">,</span>
@@ -1998,7 +2062,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_32_0.png" src="_images/ExplorationAndVisualization_32_0.png" />
+<img alt="_images/ExplorationAndVisualization_44_0.png" src="_images/ExplorationAndVisualization_44_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2009,7 +2073,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ExplorationAndVisualization_33_0.png" src="_images/ExplorationAndVisualization_33_0.png" />
+<img alt="_images/ExplorationAndVisualization_45_0.png" src="_images/ExplorationAndVisualization_45_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2048,6 +2112,18 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;figures/simpletimelapsegif.gif&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ExplorationAndVisualization_47_0.png" src="_images/ExplorationAndVisualization_47_0.png" />
+</div>
+</div>
+<p>Now lets use a colormesh to linearly interpolate between the points to see how the areas surrounding the Bay Area change over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vu</span><span class="o">.</span><span class="n">aqviz</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">bay_data</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;Bay Area&#39;</span><span class="p">,</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;2020-09-10 17:00:00&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s1">&#39;$PM_</span><span class="si">{2.5}</span><span class="s1">\;[\mu gm^{-3}]$&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_loc</span><span class="o">=</span><span class="s1">&#39;figures/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2056,7 +2132,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="_images/ExplorationAndVisualization_35_1.png" src="_images/ExplorationAndVisualization_35_1.png" />
+<img alt="_images/ExplorationAndVisualization_49_1.png" src="_images/ExplorationAndVisualization_49_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2088,16 +2164,16 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;figures/timelapsegif.gif&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;figures/timelapsegif.gif&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
-</pre></div>
+<img alt="_images/ExplorationAndVisualization_51_0.png" src="_images/ExplorationAndVisualization_51_0.png" />
 </div>
 </div>
-</div>
+<p>It would be helpful if we could expand this visualization to the rest of California, to see potentially if the particulates in the Bay Area possibly had an impact on other parts of the state, particularly in the days after the second peak when it appeared to dissipate in the Bay Area.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Commented out so we don&#39;t make too many API calls</span>
@@ -2135,7 +2211,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="_images/ExplorationAndVisualization_40_1.png" src="_images/ExplorationAndVisualization_40_1.png" />
+<img alt="_images/ExplorationAndVisualization_55_1.png" src="_images/ExplorationAndVisualization_55_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2167,13 +2243,13 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;figures/CAtimelapsegif.gif&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;figures/CAtimelapsegif.gif&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Image object&gt;
-</pre></div>
+<img alt="_images/ExplorationAndVisualization_57_0.png" src="_images/ExplorationAndVisualization_57_0.png" />
 </div>
 </div>
 </div>

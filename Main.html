@@ -705,7 +705,7 @@
 <img alt="_images/Main_28_0.png" src="_images/Main_28_0.png" />
 </div>
 </div>
-<p>The linear model seemed to fit the data and hence it was used to fill in the missin gvalues in the CO dataset. This approach was compared with linear interpolation, and they seemed to give fairly similar results.</p>
+<p>The linear model seemed to fit the data and hence it was used to fill in the missing values in the CO dataset. This approach was compared with linear interpolation, and they seemed to give fairly similar results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;figures/pm25_co_compare_interps.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
@@ -959,14 +959,17 @@
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>assumptions
-statistical hypotheses/justifications
-a few simple, scientifically interesting questions
-author contribution statement</p>
+<p>Throughout this report, we have analyzed the Bay Area air quality data from September 7th to 17th of 2020, dates surrounding the “dark day” that covered the skies with an orange tint on September 9th. We were able to see that compared to normal air quality trends evident in the May 2022 air quality data, the PM<sub>2.5</sub> within the date range in September 2020 was significantly higher. An interesting observation is that the peak PM<sub>2.5</sub> occurred a day or more after the “dark day”, indicating that there was a discrepancy between sensors’ detection of air quality and people’s visibility of air quality.</p>
+<p>We also created several visualizations of the SF Bay Area air quality in September 2020, which show the movement of particulates throughout the region over time. One limitation of these visualizations is the lack of granularity in the data, which has made it difficult to examine specific patterns in the changes in air quality.</p>
+<p>Following exploration and visualizations, we wanted to determine if the orange skies were a predictable occurrence, using PM<sub>2.5</sub> and CO concentration data. We first used a linear model to fill in the missing values in the CO concentration dataset, and then analysed PM<sub>2.5</sub> concentrations across other dates. It was determined that orange skies are not a predictable occurance.</p>
+<p>The final analysis explored using other air quality parameters and atmospheric measurements to predict the concentration of PM<sub>2.5</sub> for a given day. Despite slight correlations between the other air quality parameters and PM<sub>2.5</sub>, the Gated Recurrent Unit Neural Network used neglected to strongly predict the PM<sub>2.5</sub> level, particularly when atmospheric data was included. This is likely due to a lack of historical atmoshperic data available on the NOAA API, and future work can attempt incorporating additional data with other types of predictive models, such as those used in time series analysis.</p>
 </div>
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
 <p><strong>Wesley Darling</strong>: Created <code class="docutils literal notranslate"><span class="pre">ExplorationAndVisualization.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">viz_utils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_viz_utils.py</span></code>); created the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files; provided written material and figures for Motivation, Introduction, Data Exploration, Data Visualization, and Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Gyuhyeon Seo</strong>: Created <code class="docutils literal notranslate"><span class="pre">MainAnalysis.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">aqutils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_aqutils.py</span></code>); provided written material and figures for Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Ram Kripa</strong>: Created <code class="docutils literal notranslate"><span class="pre">modelling.ipynb</span></code>; provided written material and figures for Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Jae Hee Koh</strong>: Created <code class="docutils literal notranslate"><span class="pre">LAVisualization.ipynb</span></code>; provided written material for Conclusion section of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

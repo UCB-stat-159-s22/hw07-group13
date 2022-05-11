@@ -6,6 +6,7 @@ AQI_BREAKPOINTS = './aqtools/aqi_breakpoints.csv'
 
 def get_aqi(pollutant, value):
     """Get AQI corresponding pollutant and value
+
     :param pollutant: type of pollutant
     :param value: value of pollutant
 
@@ -33,8 +34,26 @@ def get_aqi(pollutant, value):
     return int(IP)
 
 
+def extract_localdate(dates):
+    """Extracting local date from {'utc': 'YY-mm-ddT00:00:00Z', 'local': 'YY-mm-ddT00:00:00Z'}
+
+    :param s: series of dictionary
+
+    :type s: list, numpy array
+
+    :returns: list of local dates
+    """
+    local_dates = []
+    for d in dates:
+        local_date = d['local']
+        local_date_clean = cleaning_date(local_date)
+        local_dates.append(local_date_clean)
+    return local_dates
+
+
 def cleaning_date(s):
     """Cleaning dateformat
+
     :param s: list type string sequence of date e.g. '2021-08-01T00:00:00Z'
 
     :type s: list, numpy array
@@ -46,6 +65,7 @@ def cleaning_date(s):
 
 def differencing(arr):
     """Differencing for stationarity
+
     :param arr: list type string sequences
 
     :type arr: list, numpy array

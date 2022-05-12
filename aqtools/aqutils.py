@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from datetime import datetime
 import pytz
 
@@ -62,19 +61,32 @@ def get_aqi(pollutant, value):
     return int(IP)
 
 
+def cleaning_date_format(s):
+    """Cleaning dateformat
+    :param s: date format e.g. '2021-08-01T00:00:00Z'
+
+    :type s: string
+
+    :returns: a string of clean format of date e.g. '2021-08-01 00:00:00'
+    """
+    ymd = s.split('T')[0]
+    hms = s.split('T')[1][:-1]
+    return ymd + ' ' + hms
+
+
 def extract_localdate(dates):
-    """Extracting local date from {'utc': 'YY-mm-ddT00:00:00Z', 'local': 'YY-mm-ddT00:00:00Z'}
+    """Extracting local date from [{'utc': 'YY-mm-ddT00:00:00Z', 'local': 'YY-mm-ddT00:00:00Z'}]
 
-    :param s: series of dictionary
+    :param dates: list of dictionaries containing keys('utc', 'local') and corresponding date values
 
-    :type s: list, numpy array
+    :type dates: list, numpy array
 
-    :returns: list of local dates
+    :returns: list of local dates e.g. ['2020-01-02T12:34:56Z', '2022-01-02T12:34:56Z']
     """
     local_dates = []
     for d in dates:
         local_date = d['local']
-        local_date_clean = cleaning_date(local_date)
+        local_date_clean = cleaning_date_format(local_date)
         local_dates.append(local_date_clean)
     return local_dates
 

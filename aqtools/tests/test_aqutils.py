@@ -1,4 +1,5 @@
 from aqtools import aqutils as u
+import openaq
 
 def test_utc_to_pst():
     d = '2021-09-01T00:00:00Z'
@@ -16,6 +17,7 @@ def test_getaqi():
 
 
 def test_date_pollutant_value():
+    api = openaq.OpenAQ()
     date_from = '2021-09-01T00:00:00Z'
     date_to = '2022-03-01T00:00:00Z'
     city = 'San Francisco-Oakland-Fremont'

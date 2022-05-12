@@ -20,12 +20,20 @@ from matplotlib.colors import Normalize
 def location_filter(orig_table, minlat = 36., minlon = -123.5, maxlat=39., maxlon = -121, starttime='2020-09-07', endtime='2020-09-13'):
     
     '''
+    Reads in a full list from an OpenAQ "api.location" call and filters it by the desired geographic and temporal regions.
+    
     inputs:
-        orig_table: the result of an api.location() call; e.g. the US locs
-    
-    
+        orig_table: the result of an api.location() call; e.g. the US locs (format: Pandas DataFrame)
+        minlat: minimum latitude of location (format: int or float)
+        minlon: minimum longitude of location (format: int or float)
+        maxlat: maximum latitude of location (format: int or float)
+        maxlon: maximum longitude (format: int or float)
+        starttime: earliest date of data collection (format: str in 'YYYY-MM-DD' format)
+        endtime: latest date of data collection (format: str in 'YYYY-MM-DD' format)
+        
+        
     output:
-        filtered_table: a DataFrame containing the original locations that pass the lat-lon and date filters
+        filtered_table: a Pandas DataFrame containing the original locations that pass the lat-lon and date filters
     
     
     '''
@@ -43,11 +51,20 @@ def location_filter(orig_table, minlat = 36., minlon = -123.5, maxlat=39., maxlo
 def param_data_per_loc_for_period(loc_table, start_date= '2020-09-07', end_date='2020-09-13', param='pm25', limit=1000, interpolate=True):
     
     '''
+    Reads in a table of desired locations and queries the OpenAQ API for each location for the dates and parameters
+    requested.
+    
     input:
-        loc_table: result from filtered table
+        loc_table: result from filtered table (format: Pandas DataFrame)
+        start_date: earliest date of data you want to query for (format: str in 'YYYY-MM-DD' format)
+        end_date: latest date of data you want to query for (format: str in 'YYYY-MM-DD' format)
+        param: parameter you are querying data for (format: str, either 'pm25', 'o3', 'no2', 'co'
+        limit: maximum number of results from API per location query (format: int)
+        interpolate: linearly interpolate between missing data values (format: boolean)
+        
     
     output:
-        df: a DataFrame of each location's data for the parameter specified for the date range specified.
+        df: a Pandas DataFrame of each location's data for the parameter specified for the date range specified.
             Results will be forwards and backwards interpolated in interpolate=True
    
     '''
@@ -89,9 +106,13 @@ def param_data_per_loc_for_period(loc_table, start_date= '2020-09-07', end_date=
 
 def cities_coords(loc_table, df):
     ''' 
+    Reads in a table of air quality sensor locations and cross-references it with a table of
+    aggregated data collected at those locations to create a GeoDataFrame that can be plotted
+    and a list of the coordinates that can be applied in later functions.
+    
     inputs:
-        loc_table is a dataframe that is the output of location_filter
-        df is a dataframe that is the output of param_data_per_loc_for_period
+        loc_table: a dataframe that is the output of location_filter (format: Pandas DataFrame)
+        df: a dataframe that is the output of param_data_per_loc_for_period (format: Pandas DataFrame)
     
     outputs:
         cities_coords: a GeoDataFrame of cities coordinates
@@ -113,12 +134,17 @@ def cities_coords(loc_table, df):
 
 def merge_and_save_gdf(cities_coords, data, save=True, filename='data/bayareadarkdays.geojson'):
     '''
+    Combines the coordinates of your air quality sensor locations with the data collected at each location
+    and gives the user the option to save it in a GeoJSON for later use. 
+    
     inputs:
-        cities_coords: is the first result of the cities_coords() function
-        data: is the result of param_data_per_loc_for_period()
+        cities_coords: the first result of the cities_coords() function (format: GeoDataFrame)
+        data: is the result of param_data_per_loc_for_period() (format: Pandas DataFrame)
+        save: option to save file as GeoJSON (format: boolean)
+        filename: path to save file as GeoJSON (format: str)
     
     returns:
-        temp, a full Dataframe containing all data in a merged format that can be read by the plotting functions.
+        temp: a Pandas Dataframe containing all data in a merged format that can be read by the plotting functions.
             if save=True, saves temp as a GeoJSON file in the filename location   
     
     
@@ -138,14 +164,30 @@ def pointmap_compare(data, basemap, loc_name='Bay Area', param='pm25', date1='20
                  color_min=0, color_max=342, xmin=-50000,xmax=60000, ymin=-60000, ymax=50000, min_scale=50, max_scale=50, save=True, save_loc='figures/'):
     
     '''
-    Creates two geoplot point plots comparing param value on date1 and date2   
+    Creates two geoplot point plots of Air Quality on selected dates
     
     input: 
-        data: the result of the merge_and_save_gdf() file
-        basemap: variable pointing to a basemap to go under the pointmap
+        data: the result of a *saved* merge_and_save_gdf() file (format: GeoJSON opened as GeoDataFrame)
+        basemap: variable pointing to a basemap to go under the pointmap (format: variable)
+        loc_name: name of region to be plotted -- to be included in title (format: str)
+        param: name of air quality parameter to be plotted -- to be used in title and legend (format: str)
+        date1: first date to compare (format: str in 'YYYY-MM-DD' format)
+        date2: second date to compare (format: str in 'YYYY-MM-DD' format)
+        center_lat: latitude at which to center both images (format: int or float) 
+        center_lon: longitude at which to center both images (format: int or float)
+        color_min: minimum of color scale -- used for both pointplots (format: int or float)
+        color_max: maximum of color scale -- used for both pointplots (format: int or float)
+        xmin: minimum of x axis for basemap -- used for both pointplots (format: int or float)
+        xmax: maximum of x axis for basemap -- used for both pointplots (format: int or float)
+        ymin: minimum of y axis for basemap -- used for both pointplots (format: int or float)
+        ymax: minimum of y axis for basemap -- used for both pointplots (format: int or float)
+        min_scale: minimum of point size (scaled based on parameter value magnitude) (format: int or float)
+        max_scale: maximum of point size (scaled based on parameter value magnitude) (format: int or float)
+        save: option to save image (format: boolean)
+        save_loc: directory in which you want to save image (format: str, must include ending '/'; e.g., 'figures/')
         
      output:
-         fig: the two geoplots
+         fig: a figure of the two point plots (format: matplotlib.plt object or .png)
          
     
     
@@ -183,15 +225,29 @@ def pointmap_single(data, basemap, loc_name='Bay Area', param='pm25', date1='202
                  color_min=0, color_max=342, xmin=-50000,xmax=60000, ymin=-60000, ymax=50000, min_scale=50, max_scale=50, save=True,save_loc='figures/'):
     
     '''
-    Creates a single geoplot point plot of one param value on date1  
-    
+    Creates a single geoplot point plot of Air Quality parameter on selected dates 
+     
     input: 
-        data: the result of the merge_and_save_gdf() file
-        basemap: variable pointing to a basemap to go under the pointmap
+        data: the result of a *saved* merge_and_save_gdf() file (format: GeoJSON opened as GeoDataFrame)
+        basemap: variable pointing to a basemap to go under the pointmap (format: variable)
+        loc_name: name of region to be plotted -- to be included in title (format: str)
+        param: name of air quality parameter to be plotted -- to be used in title and legend (format: str)
+        date1: first date to compare (format: str in 'YYYY-MM-DD' format)
+        center_lat: latitude at which to center both images (format: int or float) 
+        center_lon: longitude at which to center both images (format: int or float)
+        color_min: minimum of color scale -- used for both pointplots (format: int or float)
+        color_max: maximum of color scale -- used for both pointplots (format: int or float)
+        xmin: minimum of x axis for basemap -- used for both pointplots (format: int or float)
+        xmax: maximum of x axis for basemap -- used for both pointplots (format: int or float)
+        ymin: minimum of y axis for basemap -- used for both pointplots (format: int or float)
+        ymax: minimum of y axis for basemap -- used for both pointplots (format: int or float)
+        min_scale: minimum of point size (scaled based on parameter value magnitude) (format: int or float)
+        max_scale: maximum of point size (scaled based on parameter value magnitude) (format: int or float)
+        save: option to save image (format: boolean)
+        save_loc: directory in which you want to save image (format: str, must include ending '/'; e.g., 'figures/')
         
      output:
-         fig: the two geoplots
-         
+         fig: a figure of the two point plots (format: matplotlib.plt object or .png)
     
     
     
@@ -220,15 +276,19 @@ def aqviz(dataframe, coords, region='Bay Area',date='2020-09-06 17:00:00', param
     '''
     Based on: https://stackoverflow.com/questions/26872337/how-can-i-get-my-contour-plot-superimposed-on-a-basemap
     
-    Creates a heatmap based on param values for a specific date
+    Creates a heatmap by interpolating between parameter values at 
     
     inputs:
-        dataframe: the result from the merge_and_save_gdf() function
-        coords: coordinates of the locations, second result from cities_coords() function
+        dataframe: the result of a *saved* merge_and_save_gdf() file (format: GeoJSON opened as GeoDataFrame)
+        coords: coordinates of the locations, second result from cities_coords() function (format: list)
+        region: name of region to be plotted -- to be included in title (format: str)
+        date: date that you wish to create heatmap for (format: str in 'YYYY-MM-DD HH:MM:SS' format)
+        param: name of air quality parameter to be plotted -- to be used in title and legend (format: str)
+        save: option to save image (format: boolean)
+        save_loc: directory in which you want to save image (format: str, must include ending '/'; e.g., 'figures/')
 
     outputs:
-        a figure of the heatmap
-    
+        No output (this is by design, so the function can be used for animating gifs)
     
     '''
     

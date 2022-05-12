@@ -104,7 +104,9 @@ def date_pollutant_value(lst_of_dict, pollutant):
     """
     df = pd.DataFrame(data=lst_of_dict)
     df['date'] = extract_localdate(df['date'].values)
-    df['date'] = pd.to_datetime(df['date'])
+    df['date'] = df['date'].apply(lambda x: x.rsplit('-', 1)[0])
+    # df['date'] = pd.to_datetime(df['date'])
+    # df['date']= df['date'].dt.strftime('%Y-%M-%D %H:%M:%S')
     df = df.rename(columns={"value": pollutant})
     df = df.loc[:, ['date', pollutant]]
     df = df.iloc[::-1]

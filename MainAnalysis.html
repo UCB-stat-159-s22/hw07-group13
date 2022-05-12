@@ -373,6 +373,173 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">extract_localdate</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="c1"># df[&#39;date&#39;] = pd.to_datetime(df[&#39;date&#39;], format=&#39;%Y-%m-%d %H:%M:%S&#39;)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>location</th>
+      <th>parameter</th>
+      <th>value</th>
+      <th>date</th>
+      <th>unit</th>
+      <th>coordinates</th>
+      <th>country</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.30</td>
+      <td>2022-02-28 16:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.32</td>
+      <td>2022-02-28 15:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.38</td>
+      <td>2022-02-28 14:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.46</td>
+      <td>2022-02-28 13:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.47</td>
+      <td>2022-02-28 12:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3596</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.37</td>
+      <td>2021-08-31 21:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>3597</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.36</td>
+      <td>2021-08-31 20:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>3598</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.30</td>
+      <td>2021-08-31 19:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>3599</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.30</td>
+      <td>2021-08-31 18:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+    <tr>
+      <th>3600</th>
+      <td>Oakland</td>
+      <td>co</td>
+      <td>0.30</td>
+      <td>2021-08-31 17:00:00</td>
+      <td>ppm</td>
+      <td>{'latitude': 37.743061, 'longitude': -122.169907}</td>
+      <td>US</td>
+      <td>San Francisco-Oakland-Fremont</td>
+    </tr>
+  </tbody>
+</table>
+<p>3601 rows × 8 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no2</span>
 <span class="n">pollutant</span> <span class="o">=</span> <span class="s1">&#39;no2&#39;</span>
 <span class="n">status</span><span class="p">,</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">measurements</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="n">city</span><span class="p">,</span>
@@ -693,13 +860,14 @@
 
 <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Robust Scaler&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./figures/scaling_ver1.png&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_9_0.png" src="_images/MainAnalysis_9_0.png" />
+<img alt="_images/MainAnalysis_10_0.png" src="_images/MainAnalysis_10_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -718,25 +886,26 @@
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;o3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">o3_diff</span>
 <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Differencing&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./figures/differencing_ver1.png&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11733/490855220.py:10: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7700/3874090531.py:10: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;co&#39;] = co_diff
-/tmp/ipykernel_11733/490855220.py:11: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/3874090531.py:11: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;no2&#39;] = no2_diff
-/tmp/ipykernel_11733/490855220.py:12: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/3874090531.py:12: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -744,7 +913,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   df[&#39;o3&#39;] = o3_diff
 </pre></div>
 </div>
-<img alt="_images/MainAnalysis_10_1.png" src="_images/MainAnalysis_10_1.png" />
+<img alt="_images/MainAnalysis_11_1.png" src="_images/MainAnalysis_11_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -882,7 +1051,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-05-11 14:09:01.380168: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-05-12 03:39:34.489909: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -917,208 +1086,208 @@ _________________________________________________________________
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/100
-22/22 [==============================] - 3s 15ms/step - loss: 63.9245
+22/22 [==============================] - 3s 15ms/step - loss: 61.7825
 Epoch 2/100
-22/22 [==============================] - 0s 13ms/step - loss: 48.2013
+22/22 [==============================] - 0s 14ms/step - loss: 47.2600
 Epoch 3/100
-22/22 [==============================] - 0s 13ms/step - loss: 46.2972
+22/22 [==============================] - 0s 15ms/step - loss: 46.5220
 Epoch 4/100
-22/22 [==============================] - 0s 14ms/step - loss: 46.3311
+22/22 [==============================] - 0s 14ms/step - loss: 46.0431
 Epoch 5/100
-22/22 [==============================] - 0s 14ms/step - loss: 46.0769
+22/22 [==============================] - 0s 14ms/step - loss: 45.9086
 Epoch 6/100
-22/22 [==============================] - 0s 13ms/step - loss: 47.0481
+22/22 [==============================] - 0s 14ms/step - loss: 45.9669
 Epoch 7/100
-22/22 [==============================] - 0s 14ms/step - loss: 45.9698
+22/22 [==============================] - 0s 14ms/step - loss: 46.2019
 Epoch 8/100
-22/22 [==============================] - 0s 13ms/step - loss: 45.3761
+22/22 [==============================] - 0s 13ms/step - loss: 43.4890
 Epoch 9/100
-22/22 [==============================] - 0s 13ms/step - loss: 44.7721
+22/22 [==============================] - 0s 14ms/step - loss: 41.3602
 Epoch 10/100
-22/22 [==============================] - 0s 14ms/step - loss: 41.0455
+22/22 [==============================] - 0s 15ms/step - loss: 39.4300
 Epoch 11/100
-22/22 [==============================] - 0s 14ms/step - loss: 40.2695
+22/22 [==============================] - 0s 15ms/step - loss: 38.2915
 Epoch 12/100
-22/22 [==============================] - 0s 14ms/step - loss: 41.2605
+22/22 [==============================] - 0s 15ms/step - loss: 40.1313
 Epoch 13/100
-22/22 [==============================] - 0s 13ms/step - loss: 39.4115
+22/22 [==============================] - 0s 15ms/step - loss: 37.6508
 Epoch 14/100
-22/22 [==============================] - 0s 14ms/step - loss: 37.1630
+22/22 [==============================] - 0s 14ms/step - loss: 36.5795
 Epoch 15/100
-22/22 [==============================] - 0s 14ms/step - loss: 37.6529
+22/22 [==============================] - 0s 14ms/step - loss: 36.3274
 Epoch 16/100
-22/22 [==============================] - 0s 13ms/step - loss: 35.4869
+22/22 [==============================] - 0s 14ms/step - loss: 35.6911
 Epoch 17/100
-22/22 [==============================] - 0s 14ms/step - loss: 35.9424
+22/22 [==============================] - 0s 14ms/step - loss: 35.0691
 Epoch 18/100
-22/22 [==============================] - 0s 14ms/step - loss: 36.2641
+22/22 [==============================] - 0s 14ms/step - loss: 35.2598
 Epoch 19/100
-22/22 [==============================] - 0s 13ms/step - loss: 34.3795
+22/22 [==============================] - 0s 14ms/step - loss: 36.0980
 Epoch 20/100
-22/22 [==============================] - 0s 13ms/step - loss: 33.7533
+22/22 [==============================] - 0s 15ms/step - loss: 34.3189
 Epoch 21/100
-22/22 [==============================] - 0s 14ms/step - loss: 34.1249
+22/22 [==============================] - 0s 15ms/step - loss: 33.0377
 Epoch 22/100
-22/22 [==============================] - 0s 12ms/step - loss: 32.7698
+22/22 [==============================] - 0s 14ms/step - loss: 32.3313
 Epoch 23/100
-22/22 [==============================] - 0s 12ms/step - loss: 32.3775
+22/22 [==============================] - 0s 14ms/step - loss: 31.3445
 Epoch 24/100
-22/22 [==============================] - 0s 13ms/step - loss: 32.4814
+22/22 [==============================] - 0s 14ms/step - loss: 30.9620
 Epoch 25/100
-22/22 [==============================] - 0s 13ms/step - loss: 31.3374
+22/22 [==============================] - 0s 15ms/step - loss: 29.8989
 Epoch 26/100
-22/22 [==============================] - 0s 12ms/step - loss: 30.6436
+22/22 [==============================] - 0s 16ms/step - loss: 28.9788
 Epoch 27/100
-22/22 [==============================] - 0s 12ms/step - loss: 29.3311
+22/22 [==============================] - 0s 14ms/step - loss: 28.2696
 Epoch 28/100
-22/22 [==============================] - 0s 13ms/step - loss: 31.3755
+22/22 [==============================] - 0s 14ms/step - loss: 27.7180
 Epoch 29/100
-22/22 [==============================] - 0s 12ms/step - loss: 29.2711
+22/22 [==============================] - 0s 14ms/step - loss: 28.8570
 Epoch 30/100
-22/22 [==============================] - 0s 12ms/step - loss: 27.9217
+22/22 [==============================] - 0s 15ms/step - loss: 26.2209
 Epoch 31/100
-22/22 [==============================] - 0s 13ms/step - loss: 27.4560
+22/22 [==============================] - 0s 15ms/step - loss: 25.1053
 Epoch 32/100
-22/22 [==============================] - 0s 13ms/step - loss: 25.8603
+22/22 [==============================] - 0s 15ms/step - loss: 24.3861
 Epoch 33/100
-22/22 [==============================] - 0s 12ms/step - loss: 26.2358
+22/22 [==============================] - 0s 14ms/step - loss: 23.9058
 Epoch 34/100
-22/22 [==============================] - 0s 13ms/step - loss: 24.8579
+22/22 [==============================] - 0s 15ms/step - loss: 23.0863
 Epoch 35/100
-22/22 [==============================] - 0s 13ms/step - loss: 23.9963
+22/22 [==============================] - 0s 14ms/step - loss: 22.9559
 Epoch 36/100
-22/22 [==============================] - 0s 13ms/step - loss: 22.8424
+22/22 [==============================] - 0s 14ms/step - loss: 22.4067
 Epoch 37/100
-22/22 [==============================] - 0s 12ms/step - loss: 22.9477
+22/22 [==============================] - 0s 15ms/step - loss: 19.7727
 Epoch 38/100
-22/22 [==============================] - 0s 12ms/step - loss: 24.2482
+22/22 [==============================] - 0s 15ms/step - loss: 18.2430
 Epoch 39/100
-22/22 [==============================] - 0s 13ms/step - loss: 21.5218
+22/22 [==============================] - 0s 14ms/step - loss: 16.6916
 Epoch 40/100
-22/22 [==============================] - 0s 13ms/step - loss: 20.3683
+22/22 [==============================] - 0s 15ms/step - loss: 17.0721
 Epoch 41/100
-22/22 [==============================] - 0s 12ms/step - loss: 19.4128
+22/22 [==============================] - 0s 14ms/step - loss: 17.3268
 Epoch 42/100
-22/22 [==============================] - 0s 14ms/step - loss: 18.2012
+22/22 [==============================] - 0s 15ms/step - loss: 16.3780
 Epoch 43/100
-22/22 [==============================] - 0s 13ms/step - loss: 17.0342
+22/22 [==============================] - 0s 14ms/step - loss: 14.5547
 Epoch 44/100
-22/22 [==============================] - 0s 12ms/step - loss: 16.0729
+22/22 [==============================] - 0s 15ms/step - loss: 13.6701
 Epoch 45/100
-22/22 [==============================] - 0s 13ms/step - loss: 15.0136
+22/22 [==============================] - 0s 15ms/step - loss: 13.8296
 Epoch 46/100
-22/22 [==============================] - 0s 14ms/step - loss: 13.9102
+22/22 [==============================] - 0s 14ms/step - loss: 13.4327
 Epoch 47/100
-22/22 [==============================] - 0s 15ms/step - loss: 13.5035
+22/22 [==============================] - 0s 15ms/step - loss: 12.2368
 Epoch 48/100
-22/22 [==============================] - 0s 15ms/step - loss: 12.3798
+22/22 [==============================] - 0s 15ms/step - loss: 11.6621
 Epoch 49/100
-22/22 [==============================] - 0s 13ms/step - loss: 12.8764
+22/22 [==============================] - 0s 14ms/step - loss: 10.4138
 Epoch 50/100
-22/22 [==============================] - 0s 13ms/step - loss: 12.7773
+22/22 [==============================] - 0s 15ms/step - loss: 9.2011
 Epoch 51/100
-22/22 [==============================] - 0s 13ms/step - loss: 11.1810
+22/22 [==============================] - 0s 15ms/step - loss: 9.1597
 Epoch 52/100
-22/22 [==============================] - 0s 14ms/step - loss: 11.9169
+22/22 [==============================] - 0s 15ms/step - loss: 8.2274
 Epoch 53/100
-22/22 [==============================] - 0s 14ms/step - loss: 10.4509
+22/22 [==============================] - 0s 16ms/step - loss: 7.9333
 Epoch 54/100
-22/22 [==============================] - 0s 14ms/step - loss: 9.0696
+22/22 [==============================] - 0s 15ms/step - loss: 7.3819
 Epoch 55/100
-22/22 [==============================] - 0s 14ms/step - loss: 9.6583
+22/22 [==============================] - 0s 15ms/step - loss: 7.3128
 Epoch 56/100
-22/22 [==============================] - 0s 12ms/step - loss: 9.0751
+22/22 [==============================] - 0s 15ms/step - loss: 6.6691
 Epoch 57/100
-22/22 [==============================] - 0s 12ms/step - loss: 7.4573
+22/22 [==============================] - 0s 15ms/step - loss: 6.8974
 Epoch 58/100
-22/22 [==============================] - 0s 12ms/step - loss: 7.2251
+22/22 [==============================] - 0s 15ms/step - loss: 6.2350
 Epoch 59/100
-22/22 [==============================] - 0s 13ms/step - loss: 6.5863
+22/22 [==============================] - 0s 15ms/step - loss: 5.3208
 Epoch 60/100
-22/22 [==============================] - 0s 13ms/step - loss: 5.9337
+22/22 [==============================] - 0s 15ms/step - loss: 5.3226
 Epoch 61/100
-22/22 [==============================] - 0s 13ms/step - loss: 6.3221
+22/22 [==============================] - 0s 15ms/step - loss: 4.9757
 Epoch 62/100
-22/22 [==============================] - 0s 13ms/step - loss: 5.5133
+22/22 [==============================] - 0s 15ms/step - loss: 4.7543
 Epoch 63/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.7795
+22/22 [==============================] - 0s 16ms/step - loss: 4.3134
 Epoch 64/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.5114
+22/22 [==============================] - 0s 15ms/step - loss: 3.9720
 Epoch 65/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.5905
+22/22 [==============================] - 0s 15ms/step - loss: 3.4406
 Epoch 66/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.5400
+22/22 [==============================] - 0s 16ms/step - loss: 3.1337
 Epoch 67/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.0118
+22/22 [==============================] - 0s 15ms/step - loss: 3.2613
 Epoch 68/100
-22/22 [==============================] - 0s 13ms/step - loss: 4.1340
+22/22 [==============================] - 0s 15ms/step - loss: 4.1395
 Epoch 69/100
-22/22 [==============================] - 0s 13ms/step - loss: 3.6518
+22/22 [==============================] - 0s 15ms/step - loss: 4.7379
 Epoch 70/100
-22/22 [==============================] - 0s 13ms/step - loss: 3.4388
+22/22 [==============================] - 0s 14ms/step - loss: 4.3833
 Epoch 71/100
-22/22 [==============================] - 0s 13ms/step - loss: 3.2069
+22/22 [==============================] - 0s 15ms/step - loss: 3.7696
 Epoch 72/100
-22/22 [==============================] - 0s 12ms/step - loss: 2.9892
+22/22 [==============================] - 0s 15ms/step - loss: 3.3501
 Epoch 73/100
-22/22 [==============================] - 0s 13ms/step - loss: 3.1259
+22/22 [==============================] - 0s 16ms/step - loss: 2.7507
 Epoch 74/100
-22/22 [==============================] - 0s 13ms/step - loss: 2.8106
+22/22 [==============================] - 0s 15ms/step - loss: 2.3119
 Epoch 75/100
-22/22 [==============================] - 0s 13ms/step - loss: 2.6646
+22/22 [==============================] - 0s 15ms/step - loss: 1.9574
 Epoch 76/100
-22/22 [==============================] - 0s 13ms/step - loss: 2.6157
+22/22 [==============================] - 0s 14ms/step - loss: 1.7500
 Epoch 77/100
-22/22 [==============================] - 0s 13ms/step - loss: 2.3599
+22/22 [==============================] - 0s 14ms/step - loss: 1.7945
 Epoch 78/100
-22/22 [==============================] - 0s 12ms/step - loss: 2.2825
+22/22 [==============================] - 0s 15ms/step - loss: 1.7374
 Epoch 79/100
-22/22 [==============================] - 0s 12ms/step - loss: 2.0742
+22/22 [==============================] - 0s 14ms/step - loss: 1.5639
 Epoch 80/100
-22/22 [==============================] - 0s 13ms/step - loss: 2.1042
+22/22 [==============================] - 0s 15ms/step - loss: 1.4988
 Epoch 81/100
-22/22 [==============================] - 0s 14ms/step - loss: 2.1519
+22/22 [==============================] - 0s 15ms/step - loss: 1.5989
 Epoch 82/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.9634
+22/22 [==============================] - 0s 14ms/step - loss: 1.3911
 Epoch 83/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.6793
+22/22 [==============================] - 0s 15ms/step - loss: 1.2364
 Epoch 84/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.5826
+22/22 [==============================] - 0s 15ms/step - loss: 1.1558
 Epoch 85/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.5312
+22/22 [==============================] - 0s 14ms/step - loss: 1.1362
 Epoch 86/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.4527
+22/22 [==============================] - 0s 15ms/step - loss: 1.0861
 Epoch 87/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.2915
+22/22 [==============================] - 0s 15ms/step - loss: 0.9349
 Epoch 88/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.3265
+22/22 [==============================] - 0s 14ms/step - loss: 0.8588
 Epoch 89/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.1764
+22/22 [==============================] - 0s 15ms/step - loss: 0.7909
 Epoch 90/100
-22/22 [==============================] - 0s 14ms/step - loss: 1.3851
+22/22 [==============================] - 0s 15ms/step - loss: 0.7393
 Epoch 91/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.2696
+22/22 [==============================] - 0s 14ms/step - loss: 0.8159
 Epoch 92/100
-22/22 [==============================] - 0s 12ms/step - loss: 1.1789
+22/22 [==============================] - 0s 14ms/step - loss: 0.7322
 Epoch 93/100
-22/22 [==============================] - 0s 12ms/step - loss: 1.2087
+22/22 [==============================] - 0s 14ms/step - loss: 0.7075
 Epoch 94/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.0677
+22/22 [==============================] - 0s 14ms/step - loss: 0.6991
 Epoch 95/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.0761
+22/22 [==============================] - 0s 15ms/step - loss: 0.6262
 Epoch 96/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.0010
+22/22 [==============================] - 0s 15ms/step - loss: 0.6037
 Epoch 97/100
-22/22 [==============================] - 0s 12ms/step - loss: 0.8501
+22/22 [==============================] - 0s 15ms/step - loss: 0.7232
 Epoch 98/100
-22/22 [==============================] - 0s 12ms/step - loss: 0.8602
+22/22 [==============================] - 0s 15ms/step - loss: 0.7145
 Epoch 99/100
-22/22 [==============================] - 0s 13ms/step - loss: 0.8657
+22/22 [==============================] - 0s 14ms/step - loss: 0.5586
 Epoch 100/100
-22/22 [==============================] - 0s 13ms/step - loss: 1.0275
+22/22 [==============================] - 0s 14ms/step - loss: 0.5060
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7f1c787f0670&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7f66744f5100&gt;
 </pre></div>
 </div>
 </div>
@@ -1142,7 +1311,7 @@ Epoch 100/100
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_16_0.png" src="_images/MainAnalysis_16_0.png" />
+<img alt="_images/MainAnalysis_17_0.png" src="_images/MainAnalysis_17_0.png" />
 </div>
 </div>
 </div>
@@ -1425,7 +1594,11 @@ Epoch 100/100
 <span class="n">df_w</span><span class="p">[[</span><span class="s1">&#39;wind speed&#39;</span><span class="p">,</span> <span class="s1">&#39;relative humidity&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df_w</span><span class="p">[[</span><span class="s1">&#39;wind speed&#39;</span><span class="p">,</span> <span class="s1">&#39;relative humidity&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_w</span><span class="p">[[</span><span class="s1">&#39;wind speed&#39;</span><span class="p">,</span> <span class="s1">&#39;relative humidity&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
 <span class="n">df_w</span> <span class="o">=</span> <span class="n">df_w</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
 <span class="c1"># df.to_csv(&#39;./fillna weather.csv&#39;)</span>
-<span class="n">df_w</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="n">df_w</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_w</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">))</span>
+
+<span class="n">df_w</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1455,22 +1628,22 @@ Epoch 100/100
   </thead>
   <tbody>
     <tr>
-      <th>57</th>
-      <td>2022-05-04 07:00:00</td>
-      <td>18.36</td>
-      <td>74.290523</td>
+      <th>72</th>
+      <td>2022-05-04 18:00:00</td>
+      <td>25.92</td>
+      <td>71.830366</td>
     </tr>
     <tr>
-      <th>95</th>
-      <td>2022-05-04 09:00:00</td>
-      <td>9.36</td>
-      <td>72.237266</td>
+      <th>52</th>
+      <td>2022-05-04 19:00:00</td>
+      <td>20.52</td>
+      <td>80.266011</td>
     </tr>
     <tr>
-      <th>55</th>
-      <td>2022-05-04 10:00:00</td>
-      <td>18.36</td>
-      <td>62.603058</td>
+      <th>43</th>
+      <td>2022-05-04 20:00:00</td>
+      <td>29.52</td>
+      <td>86.313549</td>
     </tr>
   </tbody>
 </table>
@@ -1480,7 +1653,7 @@ Epoch 100/100
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_co</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_no2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_o3</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_w</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_w</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_pm25</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
 <span class="n">df</span>
@@ -1525,49 +1698,49 @@ Epoch 100/100
   </thead>
   <tbody>
     <tr>
-      <th>2022-05-04 07:00:00</th>
-      <td>0.60</td>
-      <td>0.016</td>
-      <td>0.008</td>
-      <td>18.36</td>
-      <td>74.290523</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>2022-05-04 09:00:00</th>
-      <td>0.41</td>
-      <td>0.013</td>
-      <td>0.024</td>
-      <td>9.36</td>
-      <td>72.237266</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>2022-05-04 10:00:00</th>
-      <td>0.43</td>
-      <td>0.019</td>
-      <td>0.027</td>
-      <td>18.36</td>
-      <td>62.603058</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>2022-05-04 11:00:00</th>
-      <td>0.34</td>
-      <td>0.015</td>
-      <td>0.034</td>
-      <td>9.36</td>
-      <td>45.123994</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>2022-05-04 12:00:00</th>
+      <th>2022-05-04 18:00:00</th>
       <td>0.29</td>
-      <td>0.013</td>
-      <td>0.038</td>
-      <td>12.96</td>
-      <td>39.569368</td>
+      <td>0.009</td>
+      <td>0.027</td>
+      <td>25.92</td>
+      <td>71.830366</td>
       <td>11</td>
+    </tr>
+    <tr>
+      <th>2022-05-04 19:00:00</th>
+      <td>0.28</td>
+      <td>0.009</td>
+      <td>0.023</td>
+      <td>20.52</td>
+      <td>80.266011</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2022-05-04 20:00:00</th>
+      <td>0.30</td>
+      <td>0.009</td>
+      <td>0.023</td>
+      <td>29.52</td>
+      <td>86.313549</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>2022-05-04 21:00:00</th>
+      <td>0.26</td>
+      <td>0.010</td>
+      <td>0.023</td>
+      <td>24.12</td>
+      <td>89.229634</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2022-05-04 22:00:00</th>
+      <td>0.27</td>
+      <td>0.011</td>
+      <td>0.022</td>
+      <td>18.36</td>
+      <td>89.229634</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1625,7 +1798,7 @@ Epoch 100/100
     </tr>
   </tbody>
 </table>
-<p>122 rows × 6 columns</p>
+<p>112 rows × 6 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1653,13 +1826,14 @@ Epoch 100/100
 
 <span class="n">plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Robust Scaler&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./figures/scaling_ver2.png&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_25_0.png" src="_images/MainAnalysis_25_0.png" />
+<img alt="_images/MainAnalysis_26_0.png" src="_images/MainAnalysis_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1682,37 +1856,38 @@ Epoch 100/100
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;relative humidity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh_diff</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Differencing&#39;</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./figures/differencing_ver2.png&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11733/478646036.py:12: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7700/1728641024.py:12: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;co&#39;] = co_diff
-/tmp/ipykernel_11733/478646036.py:13: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/1728641024.py:13: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;no2&#39;] = no2_diff
-/tmp/ipykernel_11733/478646036.py:14: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/1728641024.py:14: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;o3&#39;] = o3_diff
-/tmp/ipykernel_11733/478646036.py:15: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/1728641024.py:15: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df[&#39;wind speed&#39;] = ws_diff
-/tmp/ipykernel_11733/478646036.py:16: SettingWithCopyWarning: 
+/tmp/ipykernel_7700/1728641024.py:16: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1720,7 +1895,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   df[&#39;relative humidity&#39;] = rh_diff
 </pre></div>
 </div>
-<img alt="_images/MainAnalysis_26_1.png" src="_images/MainAnalysis_26_1.png" />
+<img alt="_images/MainAnalysis_27_1.png" src="_images/MainAnalysis_27_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1763,55 +1938,55 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
     <tr>
       <th>co</th>
       <td>1.000000</td>
-      <td>0.599696</td>
-      <td>-0.725872</td>
-      <td>-0.725872</td>
-      <td>-0.725872</td>
-      <td>-0.334219</td>
+      <td>0.614983</td>
+      <td>-0.587944</td>
+      <td>-0.587944</td>
+      <td>-0.587944</td>
+      <td>-0.132807</td>
     </tr>
     <tr>
       <th>no2</th>
-      <td>0.599696</td>
+      <td>0.614983</td>
       <td>1.000000</td>
-      <td>-0.687908</td>
-      <td>-0.687908</td>
-      <td>-0.687908</td>
-      <td>-0.187019</td>
+      <td>-0.796106</td>
+      <td>-0.796106</td>
+      <td>-0.796106</td>
+      <td>-0.168784</td>
     </tr>
     <tr>
       <th>o3</th>
-      <td>-0.725872</td>
-      <td>-0.687908</td>
+      <td>-0.587944</td>
+      <td>-0.796106</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>0.294662</td>
+      <td>0.120429</td>
     </tr>
     <tr>
       <th>wind speed</th>
-      <td>-0.725872</td>
-      <td>-0.687908</td>
+      <td>-0.587944</td>
+      <td>-0.796106</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>0.294662</td>
+      <td>0.120429</td>
     </tr>
     <tr>
       <th>relative humidity</th>
-      <td>-0.725872</td>
-      <td>-0.687908</td>
+      <td>-0.587944</td>
+      <td>-0.796106</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>0.294662</td>
+      <td>0.120429</td>
     </tr>
     <tr>
       <th>pm25</th>
-      <td>-0.334219</td>
-      <td>-0.187019</td>
-      <td>0.294662</td>
-      <td>0.294662</td>
-      <td>0.294662</td>
+      <td>-0.132807</td>
+      <td>-0.168784</td>
+      <td>0.120429</td>
+      <td>0.120429</td>
+      <td>0.120429</td>
       <td>1.000000</td>
     </tr>
   </tbody>
@@ -1839,7 +2014,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((113, 8, 5), (113, 1))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((103, 8, 5), (103, 1))
 </pre></div>
 </div>
 </div>
@@ -1859,7 +2034,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((83, 8, 5), (83, 1), (30, 8, 5), (30, 1))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((73, 8, 5), (73, 1), (30, 8, 5), (30, 1))
 </pre></div>
 </div>
 </div>
@@ -1886,15 +2061,15 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_2&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- gru_4 (GRU)                 (None, 8, 50)             8550      
+ gru_2 (GRU)                 (None, 8, 50)             8550      
                                                                  
- gru_5 (GRU)                 (None, 50)                15300     
+ gru_3 (GRU)                 (None, 50)                15300     
                                                                  
- dense_2 (Dense)             (None, 2)                 102       
+ dense_1 (Dense)             (None, 2)                 102       
                                                                  
 =================================================================
 Total params: 23,952
@@ -1915,40 +2090,76 @@ _________________________________________________________________
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
-1/1 [==============================] - 3s 3s/step - loss: 45.2418
+1/1 [==============================] - 3s 3s/step - loss: 39.2118
 Epoch 2/50
-1/1 [==============================] - 0s 13ms/step - loss: 40.6291
+1/1 [==============================] - 0s 16ms/step - loss: 35.9047
 Epoch 3/50
-1/1 [==============================] - 0s 14ms/step - loss: 32.6973
+1/1 [==============================] - 0s 15ms/step - loss: 30.0764
 Epoch 4/50
-1/1 [==============================] - 0s 13ms/step - loss: 22.4436
+1/1 [==============================] - 0s 15ms/step - loss: 22.2573
 Epoch 5/50
-1/1 [==============================] - 0s 14ms/step - loss: 12.0291
+1/1 [==============================] - 0s 15ms/step - loss: 13.3274
 Epoch 6/50
-1/1 [==============================] - 0s 13ms/step - loss: 6.9773
+1/1 [==============================] - 0s 15ms/step - loss: 6.6729
 Epoch 7/50
-1/1 [==============================] - 0s 14ms/step - loss: 9.6087
+1/1 [==============================] - 0s 14ms/step - loss: 6.5386
 Epoch 8/50
-1/1 [==============================] - 0s 14ms/step - loss: 13.7595
+1/1 [==============================] - 0s 15ms/step - loss: 10.8090
 Epoch 9/50
-1/1 [==============================] - 0s 12ms/step - loss: 13.3442
+1/1 [==============================] - 0s 16ms/step - loss: 12.7183
 Epoch 10/50
-1/1 [==============================] - 0s 12ms/step - loss: 9.5873
+1/1 [==============================] - 0s 15ms/step - loss: 10.1887
 Epoch 11/50
-1/1 [==============================] - 0s 13ms/step - loss: 7.1876
+1/1 [==============================] - 0s 15ms/step - loss: 6.9064
 Epoch 12/50
-1/1 [==============================] - 0s 13ms/step - loss: 7.8250
+1/1 [==============================] - 0s 15ms/step - loss: 5.9878
 Epoch 13/50
-1/1 [==============================] - 0s 11ms/step - loss: 9.7330
+1/1 [==============================] - 0s 14ms/step - loss: 7.1485
 Epoch 14/50
-1/1 [==============================] - 0s 14ms/step - loss: 10.6010
+1/1 [==============================] - 0s 13ms/step - loss: 8.6062
 Epoch 15/50
-1/1 [==============================] - 0s 11ms/step - loss: 9.6402
+1/1 [==============================] - 0s 13ms/step - loss: 8.9615
 Epoch 16/50
-1/1 [==============================] - 0s 11ms/step - loss: 7.8602
+1/1 [==============================] - 0s 13ms/step - loss: 7.9354
+Epoch 17/50
+1/1 [==============================] - 0s 13ms/step - loss: 6.3954
+Epoch 18/50
+1/1 [==============================] - 0s 13ms/step - loss: 5.6047
+Epoch 19/50
+1/1 [==============================] - 0s 13ms/step - loss: 6.0716
+Epoch 20/50
+1/1 [==============================] - 0s 13ms/step - loss: 7.0572
+Epoch 21/50
+1/1 [==============================] - 0s 13ms/step - loss: 7.4110
+Epoch 22/50
+1/1 [==============================] - 0s 14ms/step - loss: 6.8170
+Epoch 23/50
+1/1 [==============================] - 0s 13ms/step - loss: 5.9507
+Epoch 24/50
+1/1 [==============================] - 0s 14ms/step - loss: 5.5706
+Epoch 25/50
+1/1 [==============================] - 0s 14ms/step - loss: 5.7996
+Epoch 26/50
+1/1 [==============================] - 0s 14ms/step - loss: 6.2321
+Epoch 27/50
+1/1 [==============================] - 0s 12ms/step - loss: 6.4381
+Epoch 28/50
+1/1 [==============================] - 0s 13ms/step - loss: 6.2904
+Epoch 29/50
+1/1 [==============================] - 0s 14ms/step - loss: 5.9492
+Epoch 30/50
+1/1 [==============================] - 0s 13ms/step - loss: 5.6633
+Epoch 31/50
+1/1 [==============================] - 0s 14ms/step - loss: 5.5910
+Epoch 32/50
+1/1 [==============================] - 0s 14ms/step - loss: 5.7226
+Epoch 33/50
+1/1 [==============================] - 0s 13ms/step - loss: 5.9103
+Epoch 34/50
+1/1 [==============================] - 0s 13ms/step - loss: 5.9842
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7f1c7014b0a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x7f66806cc400&gt;
 </pre></div>
 </div>
 </div>
@@ -1972,7 +2183,7 @@ Epoch 16/50
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/MainAnalysis_32_0.png" src="_images/MainAnalysis_32_0.png" />
+<img alt="_images/MainAnalysis_33_0.png" src="_images/MainAnalysis_33_0.png" />
 </div>
 </div>
 </div>

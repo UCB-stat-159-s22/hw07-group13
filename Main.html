@@ -256,13 +256,6 @@
     <a class="reference internal nav-link" href="#gated-recurrent-unit-gru">
      Gated Recurrent Unit (GRU)
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#lstm-and-gru">
-       LSTM and GRU
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -343,13 +336,6 @@
     <a class="reference internal nav-link" href="#gated-recurrent-unit-gru">
      Gated Recurrent Unit (GRU)
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#lstm-and-gru">
-       LSTM and GRU
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -777,10 +763,9 @@
 <div class="section" id="gated-recurrent-unit-gru">
 <h3>Gated Recurrent Unit (GRU)<a class="headerlink" href="#gated-recurrent-unit-gru" title="Permalink to this headline">¶</a></h3>
 <center><img src="https://miro.medium.com/max/1400/1*yBXV9o5q7L_CvY7quJt3WQ.png" width="500" height="300" /></center>
-<div class="section" id="lstm-and-gru">
-<h4>LSTM and GRU<a class="headerlink" href="#lstm-and-gru" title="Permalink to this headline">¶</a></h4>
-<p>(image from <a class="reference external" href="https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21">https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21</a>)</p>
-<p>Gated recurrent unit (GRU) was introduced by Cho, et al. (2014)  to solve the vanishing gradient problem faced by recurrent neural networks (RNN). In GRU, there are two gates: update gate, reset gate. These gates learn which data from the previous sequence is important to be kept or thrown away during the training process.</p>
+<p><strong>Long Short Term Memory (LSTM) and Gated Recurrent Unit (GRU)</strong><br>
+(Image from <a class="reference external" href="https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21">https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21</a>)</p>
+<p>Gated recurrent unit (GRU) was introduced by Cho, et al. (2014)  to solve the vanishing gradient problem faced by recurrent neural networks (RNN). In GRU, there are two gates: update gate, reset gate. These gates learn which data from the previous sequence is important to be kept or thrown away, during the training process. Since GRU uses less training parameter compared to LSTM, it is  faster than LSTM and takes up less memory.</p>
 <p>A first predictive model using Gated Recurrent Unit Neural Network was developing using only air quality data (i.e., predicting the PM<sub>2.5</sub> concentration based on the concentrations of CO, NO<sub>2</sub>, and O<sub>3</sub>. First the air quality data were scaled and made stationary using the differencing technique, as shown in the figures below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1008,7 +993,6 @@
 <p>Future work on predicting PM<sub>2.5</sub> concentrations will be necessary to build upon these preliminary analyses. A future implementation could include additional other atmospheric factors, and could be based on historical data requested by email by NOAA, to ensure that a large enough training set is available for the model. Additionally, given the periodic nature of the PM<sub>2.5</sub> concentration, statistical analysis tools from the field of time series analysis could be applied, specifically multivariate autoregressive models, multivariate linear Gaussian particle filters, or Monte Carlo Markov Chain methods. Given the importance of measuring and predicting the potentially dangerous PM<sub>2.5</sub> levels, the models found in this analysis should serve as but a stepping off point for more in-depth air quality research.</p>
 </div>
 </div>
-</div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>Throughout this report, we have analyzed the Bay Area air quality data from September 7th to 17th of 2020, dates surrounding the “dark day” that covered the skies with an orange tint on September 9th. We were able to see that compared to normal air quality trends evident in the May 2022 air quality data, the PM<sub>2.5</sub> within the date range in September 2020 was significantly higher. An interesting observation is that the peak PM<sub>2.5</sub> occurred a day or more after the “dark day”, indicating that there was a discrepancy between sensors’ detection of air quality and people’s visibility of air quality.</p>
@@ -1023,8 +1007,8 @@
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
 <p><strong>Wesley Darling</strong>: Created <code class="docutils literal notranslate"><span class="pre">ExplorationAndVisualization.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">viz_utils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_viz_utils.py</span></code>); created the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files; provided written material and figures for Motivation, Introduction, Data Exploration, Data Visualization, and Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>; reviewed code in all notebooks, fixed broken tests, ensured <code class="docutils literal notranslate"><span class="pre">pytest</span></code> and <code class="docutils literal notranslate"><span class="pre">Make</span></code> run as expected.</p>
-<p><strong>Gyuhyeon Seo</strong>: Created <code class="docutils literal notranslate"><span class="pre">MainAnalysis.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">aqutils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_aqutils.py</span></code>); built GRU-based prediction pipeline; retrieved AQI breakpoints data, daily weather data; preprocessed data; provided written material and figures for Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
-<p><strong>Ram Kripa</strong>: Created <code class="docutils literal notranslate"><span class="pre">modelling.ipynb</span></code>; provided written material and figures for Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Gyuhyeon Seo</strong>: Created <code class="docutils literal notranslate"><span class="pre">MainAnalysis.ipynb</span></code> and its utility functions and test suite (<code class="docutils literal notranslate"><span class="pre">aqutils.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_aqutils.py</span></code>); built GRU-based time series prediction pipeline; collected AQI-breakpoints data, NOAA(daily weather) data; preprocessed data; provided written material and figures for Analysis II sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
+<p><strong>Ram Kripa</strong>: Created <code class="docutils literal notranslate"><span class="pre">modelling.ipynb</span></code>; provided written material and figures for Analysis I sections of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
 <p><strong>Jae Hee Koh</strong>: Created <code class="docutils literal notranslate"><span class="pre">LA_Visualizations.ipynb</span></code>; provided written material for Conclusion section of <code class="docutils literal notranslate"><span class="pre">Main.ibynb</span></code>.</p>
 </div>
 <div class="toctree-wrapper compound">

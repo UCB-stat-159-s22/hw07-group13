@@ -1574,7 +1574,9 @@ Epoch 100/100
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">noaa</span><span class="o">.</span><span class="n">NOAA</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collect NOAA (daily weather) data using NOAA Python SDK contributed by Paulo Kuong(2018)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">noaa</span><span class="o">.</span><span class="n">NOAA</span><span class="p">()</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">get_observations</span><span class="p">(</span><span class="s1">&#39;94603&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">date_from_utc</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">date_to_utc</span><span class="p">,</span> <span class="n">num_of_stations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">windspeed</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1651,7 +1653,8 @@ Epoch 100/100
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_co</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_no2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># merge every dataframe on a date</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_co</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_no2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_o3</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_w</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_pm25</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
